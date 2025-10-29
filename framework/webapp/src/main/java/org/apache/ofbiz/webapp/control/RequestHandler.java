@@ -355,10 +355,33 @@ public final class RequestHandler {
         return null;
     }
 
+    private static boolean isHostHeaderAllowed(String serverName, List<String> allowedHosts) {
+        if (allowedHosts == null || allowedHosts.isEmpty()) {
+            return false;
+        }
+
+        for (String allowedHost : allowedHosts) {
+            // Exact match
+            if (serverName.equals(allowedHost)) {
+                return true;
+            }
+
+            // Wildcard pattern support (e.g., *.example.com)
+            if (allowedHost.startsWith("*.")) {
+                String domain = allowedHost.substring(2); // Remove "*."
+                if (serverName.endsWith("." + domain) || serverName.equals(domain)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public void doRequest(HttpServletRequest request, HttpServletResponse response, String chain,
                           GenericValue userLogin, Delegator delegator) throws RequestHandlerException, RequestHandlerExceptionAllowExternalRequests {
 
-        if (!HOSTHEADERSALLOWED.contains(request.getServerName())) {
+        if (!isHostHeaderAllowed(request.getServerName(), HOSTHEADERSALLOWED)) {
             Debug.logError("Domain " + request.getServerName() + " not accepted to prevent host header injection."
                     + " You need to set host-headers-allowed property in security.properties file.", MODULE);
             throw new RequestHandlerException("Domain " + request.getServerName() + " not accepted to prevent host header injection."
