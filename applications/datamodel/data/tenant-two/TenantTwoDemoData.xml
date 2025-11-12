@@ -5,7 +5,7 @@
     <!-- ============================================ -->
     <!-- Main Organization Party -->
     <Party partyId="HAPPYHANDS_ORG" preferredCurrencyUomId="INR" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"/>
-    <PartyGroup partyId="HAPPYHANDS_ORG" groupName="HappyHands Toys Pvt. Ltd"/>
+    <PartyGroup partyId="HAPPYHANDS_ORG" groupName="HappyHands Toys India Pvt. Ltd."/>
     <PartyRole partyId="HAPPYHANDS_ORG" roleTypeId="BILL_FROM_VENDOR"/>
     <PartyRole partyId="HAPPYHANDS_ORG" roleTypeId="BILL_TO_CUSTOMER"/>
     <PartyRole partyId="HAPPYHANDS_ORG" roleTypeId="INTERNAL_ORGANIZATIO"/>
@@ -15,19 +15,19 @@
     <!-- Contact Mechanism for Organization - Postal Address -->
     <ContactMech contactMechId="HHT_ADDR_01" contactMechTypeId="POSTAL_ADDRESS"/>
     <PartyContactMech partyId="HAPPYHANDS_ORG" contactMechId="HHT_ADDR_01" fromDate="2024-01-01 00:00:00.000" allowSolicitation="Y"/>
-    <PostalAddress contactMechId="HHT_ADDR_01" toName="HappyHands Toys Pvt. Ltd." address1="123 Craft Lane" address2="Industrial Area Phase 2" city="Jaipur" postalCode="302017" countryGeoId="IND" stateProvinceGeoId="IN-RJ"/>
+    <PostalAddress contactMechId="HHT_ADDR_01" toName="HappyHands Toys India Pvt. Ltd." address1="HappyHands Industrial Zone" city="Bengaluru" postalCode="560048" countryGeoId="IND" stateProvinceGeoId="IN-KA"/>
     <PartyContactMechPurpose contactMechPurposeTypeId="BILLING_LOCATION" partyId="HAPPYHANDS_ORG" contactMechId="HHT_ADDR_01" fromDate="2024-01-01 00:00:00.000"/>
     <PartyContactMechPurpose contactMechPurposeTypeId="GENERAL_LOCATION" partyId="HAPPYHANDS_ORG" contactMechId="HHT_ADDR_01" fromDate="2024-01-01 00:00:00.000"/>
     <PartyContactMechPurpose contactMechPurposeTypeId="PAYMENT_LOCATION" partyId="HAPPYHANDS_ORG" contactMechId="HHT_ADDR_01" fromDate="2024-01-01 00:00:00.000"/>
 
     <!-- Contact Mechanism for Organization - Email Address -->
-    <ContactMech contactMechId="HHT_EMAIL_01" contactMechTypeId="EMAIL_ADDRESS" infoString="info@happyhandstoys.com"/>
+    <ContactMech contactMechId="HHT_EMAIL_01" contactMechTypeId="EMAIL_ADDRESS" infoString="support@happyhandstoys.in"/>
     <PartyContactMech partyId="HAPPYHANDS_ORG" contactMechId="HHT_EMAIL_01" fromDate="2024-01-01 00:00:00.000" allowSolicitation="Y"/>
     <PartyContactMechPurpose contactMechPurposeTypeId="PRIMARY_EMAIL" partyId="HAPPYHANDS_ORG" contactMechId="HHT_EMAIL_01" fromDate="2024-01-01 00:00:00.000"/>
 
     <!-- Contact Mechanism for Organization - Phone Number -->
     <ContactMech contactMechId="HHT_PHONE_01" contactMechTypeId="TELECOM_NUMBER"/>
-    <TelecomNumber contactMechId="HHT_PHONE_01" countryCode="91" areaCode="141" contactNumber="2345678"/>
+    <TelecomNumber contactMechId="HHT_PHONE_01" countryCode="91" contactNumber="9123456780"/>
     <PartyContactMech partyId="HAPPYHANDS_ORG" contactMechId="HHT_PHONE_01" fromDate="2024-01-01 00:00:00.000" allowSolicitation="Y"/>
     <PartyContactMechPurpose contactMechPurposeTypeId="PRIMARY_PHONE" partyId="HAPPYHANDS_ORG" contactMechId="HHT_PHONE_01" fromDate="2024-01-01 00:00:00.000"/>
 
@@ -101,16 +101,23 @@
               description="Central warehouse used for both production and storage of wooden toys"
               defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
 
+    <!-- Assembly Unit Facility -->
+    <Facility facilityId="FAC_HHT_0002"
+              ownerPartyId="HAPPYHANDS_ORG"
+              facilityTypeId="WAREHOUSE"
+              facilityName="HappyHands Assembly Unit"
+              description="Assembly unit for toy truck production"
+              defaultInventoryItemTypeId="NON_SERIAL_INV_ITEM"/>
+
     <!-- Facility Contact Mechanism - Postal Address -->
     <ContactMech contactMechId="HHW_ADDR_01" contactMechTypeId="POSTAL_ADDRESS"/>
     <PostalAddress contactMechId="HHW_ADDR_01"
                    toName="HappyHands Workshop"
-                   address1="123 Craft Lane"
-                   address2="Industrial Area Phase 2"
-                   city="Jaipur"
-                   postalCode="302017"
+                   address1="HappyHands Industrial Zone"
+                   city="Bengaluru"
+                   postalCode="560048"
                    countryGeoId="IND"
-                   stateProvinceGeoId="IN-RJ"/>
+                   stateProvinceGeoId="IN-KA"/>
     <FacilityContactMech facilityId="HHT_WORKSHOP" contactMechId="HHW_ADDR_01" fromDate="2024-01-01 00:00:00.0"/>
     <FacilityContactMechPurpose facilityId="HHT_WORKSHOP" contactMechId="HHW_ADDR_01" contactMechPurposeTypeId="GENERAL_LOCATION" fromDate="2024-01-01 00:00:00.0"/>
     <FacilityContactMechPurpose facilityId="HHT_WORKSHOP" contactMechId="HHW_ADDR_01" contactMechPurposeTypeId="BILLING_LOCATION" fromDate="2024-01-01 00:00:00.0"/>
@@ -161,7 +168,7 @@
     <!-- HappyHands Product Store -->
     <ProductStore productStoreId="HHT_STORE"
                   storeName="HappyHands Store"
-                  companyName="HappyHands Toys Pvt. Ltd."
+                  companyName="HappyHands Toys India Pvt. Ltd."
                   title="HappyHands - Handcrafted Wooden Toys"
                   subtitle="Eco-friendly toys for happy children"
                   payToPartyId="HAPPYHANDS_ORG"
@@ -190,6 +197,50 @@
                   headerCancelStatus="ORDER_CANCELLED"
                   itemCancelStatus="ITEM_CANCELLED"
                   orderNumberPrefix="HHT"
+                  authDeclinedMessage="There has been a problem with your payment method. Please try a different method or contact customer service."
+                  authFraudMessage="Your order has been flagged for review. Please contact customer service."
+                  authErrorMessage="Problem connecting to payment processor; we will continue to retry and notify you by email."
+                  storeCreditValidDays="90"
+                  storeCreditAccountEnumId="FIN_ACCOUNT"
+                  visualThemeId="EC_DEFAULT"
+                  prodSearchExcludeVariants="Y"
+                  autoApproveInvoice="Y"
+                  shipIfCaptureFails="Y"
+                  autoApproveOrder="Y"
+                  showOutOfStockProducts="Y"/>
+
+    <!-- HappyHands Toy Store (Second Store) -->
+    <ProductStore productStoreId="STORE_HHT_0002"
+                  storeName="HappyHands Toy Store"
+                  companyName="HappyHands Toys India Pvt. Ltd."
+                  title="HappyHands Toy Store"
+                  subtitle="Quality toys for all ages"
+                  payToPartyId="HAPPYHANDS_ORG"
+                  daysToCancelNonPay="30"
+                  prorateShipping="Y"
+                  prorateTaxes="Y"
+                  inventoryFacilityId="FAC_HHT_0002"
+                  oneInventoryFacility="Y"
+                  checkInventory="Y"
+                  reserveInventory="Y"
+                  balanceResOnOrderCreation="Y"
+                  reserveOrderEnumId="INVRO_FIFO_REC"
+                  requireInventory="N"
+                  defaultLocaleString="en_US"
+                  defaultCurrencyUomId="INR"
+                  defaultSalesChannelEnumId="WEB_SALES_CHANNEL"
+                  allowPassword="Y"
+                  explodeOrderItems="N"
+                  retryFailedAuths="Y"
+                  reqReturnInventoryReceive="N"
+                  headerApprovedStatus="ORDER_APPROVED"
+                  itemApprovedStatus="ITEM_APPROVED"
+                  digitalItemApprovedStatus="ITEM_APPROVED"
+                  headerDeclinedStatus="ORDER_REJECTED"
+                  itemDeclinedStatus="ITEM_REJECTED"
+                  headerCancelStatus="ORDER_CANCELLED"
+                  itemCancelStatus="ITEM_CANCELLED"
+                  orderNumberPrefix="HHT2"
                   authDeclinedMessage="There has been a problem with your payment method. Please try a different method or contact customer service."
                   authFraudMessage="Your order has been flagged for review. Please contact customer service."
                   authErrorMessage="Problem connecting to payment processor; we will continue to retry and notify you by email."
@@ -277,6 +328,23 @@
                            productCategoryId="CAT_WOODEN_TOY"
                            fromDate="2025-01-01 00:00:00.000"/>
 
+    <!-- Second Finished Product - Toy Truck -->
+    <Product productId="PRD_HHT_0002"
+             productTypeId="FINISHED_GOOD"
+             internalName="HappyHands Toy Truck"
+             productName="HappyHands Toy Truck"
+             description="Durable and colorful toy truck for kids aged 3+"
+             isVirtual="N" isVariant="N" taxable="Y"/>
+
+    <GoodIdentification productId="PRD_HHT_0002"
+                        goodIdentificationTypeId="SKU"
+                        idValue="PRD_HHT_0002"/>
+
+    <!-- Category membership -->
+    <ProductCategoryMember productId="PRD_HHT_0002"
+                           productCategoryId="CAT_WOODEN_TOY"
+                           fromDate="2025-01-01 00:00:00.000"/>
+
     <!-- ========================= -->
     <!-- 2) RAW-MATERIAL PRODUCTS -->
     <!-- ========================= -->
@@ -306,6 +374,28 @@
              internalName="Packaging Box"
              productName="Packaging Box"
              description="Used for shipping and display"
+             isVirtual="N" isVariant="N" billOfMaterialLevel="1"/>
+
+    <!-- Additional Components for Toy Truck -->
+    <Product productId="CMP_PLASTIC_BODY"
+             productTypeId="RAW_MATERIAL"
+             internalName="Plastic Body"
+             productName="Plastic Body"
+             description="Durable plastic body for toy truck"
+             isVirtual="N" isVariant="N" billOfMaterialLevel="1"/>
+
+    <Product productId="CMP_AXLES"
+             productTypeId="RAW_MATERIAL"
+             internalName="Axles"
+             productName="Axles"
+             description="Metal axles for wheel attachment"
+             isVirtual="N" isVariant="N" billOfMaterialLevel="1"/>
+
+    <Product productId="CMP_STICKERS"
+             productTypeId="RAW_MATERIAL"
+             internalName="Stickers"
+             productName="Stickers"
+             description="Decorative stickers for toy truck"
              isVirtual="N" isVariant="N" billOfMaterialLevel="1"/>
 
     <!-- ========================= -->
@@ -355,17 +445,55 @@
                      supplierProductId="PB-001"
                      supplierProductName="Packaging Box"/>
 
+    <!-- Additional Supplier Products for Toy Truck Components -->
+    <SupplierProduct availableFromDate="2025-01-01 00:00:00.000"
+                     canDropShip="N"
+                     currencyUomId="INR"
+                     lastPrice="120.00"
+                     minimumOrderQuantity="0.000000"
+                     partyId="WOOD_SUPPLIER"
+                     productId="CMP_PLASTIC_BODY"
+                     supplierPrefOrderId="10_MAIN_SUPPL"
+                     supplierProductId="PB-002"
+                     supplierProductName="Plastic Truck Body"/>
+
+    <SupplierProduct availableFromDate="2025-01-01 00:00:00.000"
+                     canDropShip="N"
+                     currencyUomId="INR"
+                     lastPrice="45.00"
+                     minimumOrderQuantity="0.000000"
+                     partyId="WOOD_SUPPLIER"
+                     productId="CMP_AXLES"
+                     supplierPrefOrderId="10_MAIN_SUPPL"
+                     supplierProductId="AX-001"
+                     supplierProductName="Metal Axles Set"/>
+
+    <SupplierProduct availableFromDate="2025-01-01 00:00:00.000"
+                     canDropShip="N"
+                     currencyUomId="INR"
+                     lastPrice="20.00"
+                     minimumOrderQuantity="0.000000"
+                     partyId="WOOD_SUPPLIER"
+                     productId="CMP_STICKERS"
+                     supplierPrefOrderId="10_MAIN_SUPPL"
+                     supplierProductId="ST-001"
+                     supplierProductName="Decorative Sticker Set"/>
+
     <!-- ========================= -->
     <!-- 4) FACILITY INVENTORY RULES -->
     <!-- ========================= -->
     <!-- Finished good inventory rules -->
     <ProductFacility productId="PRD_WOOD_CAR" facilityId="HHT_WORKSHOP" minimumStock="10" reorderQuantity="5" daysToShip="1"/>
+    <ProductFacility productId="PRD_HHT_0002" facilityId="FAC_HHT_0002" minimumStock="15" reorderQuantity="10" daysToShip="1"/>
 
     <!-- Components inventory rules -->
     <ProductFacility productId="CMP_WOOD_BLOCK" facilityId="HHT_WORKSHOP" minimumStock="25" reorderQuantity="10" daysToShip="1"/>
     <ProductFacility productId="CMP_WHEELS" facilityId="HHT_WORKSHOP" minimumStock="25" reorderQuantity="25" daysToShip="1"/>
     <ProductFacility productId="CMP_PAINT" facilityId="HHT_WORKSHOP" minimumStock="25" reorderQuantity="10" daysToShip="1"/>
     <ProductFacility productId="CMP_BOX" facilityId="HHT_WORKSHOP" minimumStock="25" reorderQuantity="10" daysToShip="1"/>
+    <ProductFacility productId="CMP_PLASTIC_BODY" facilityId="FAC_HHT_0002" minimumStock="20" reorderQuantity="15" daysToShip="1"/>
+    <ProductFacility productId="CMP_AXLES" facilityId="FAC_HHT_0002" minimumStock="30" reorderQuantity="20" daysToShip="1"/>
+    <ProductFacility productId="CMP_STICKERS" facilityId="FAC_HHT_0002" minimumStock="50" reorderQuantity="30" daysToShip="1"/>
 
     <!-- ============================= -->
     <!-- Routing: Wooden Car Production -->
@@ -443,9 +571,86 @@
                             statusId="WEGS_CREATED"
                             fromDate="2025-01-01 00:00:00.000"/>
 
+    <!-- ============================= -->
+    <!-- Routing: Toy Truck Production -->
+    <!-- ============================= -->
+    <WorkEffort workEffortId="ROUT_HHT_0002"
+                workEffortTypeId="ROUTING"
+                currentStatusId="ROU_ACTIVE"
+                workEffortName="Toy Truck Assembly Process"
+                description="Assembly process for toy truck"
+                revisionNumber="1"
+                quantityToProduce="0"/>
+
+    <!-- Tasks for Toy Truck -->
+    <WorkEffort workEffortId="TASK_TRUCK_PREP"
+                workEffortTypeId="ROU_TASK"
+                workEffortPurposeTypeId="ROU_ASSEMBLING"
+                currentStatusId="ROU_ACTIVE"
+                workEffortName="Component Preparation"
+                description="Prepare plastic body and components"
+                revisionNumber="1"
+                estimatedMilliSeconds="2700000"
+                estimatedSetupMillis="0"/>
+
+    <WorkEffort workEffortId="TASK_TRUCK_ASSEMBLY"
+                workEffortTypeId="ROU_TASK"
+                workEffortPurposeTypeId="ROU_ASSEMBLING"
+                currentStatusId="ROU_ACTIVE"
+                workEffortName="Truck Assembly"
+                description="Assemble body with axles and wheels"
+                revisionNumber="1"
+                estimatedMilliSeconds="3600000"
+                estimatedSetupMillis="0"/>
+
+    <WorkEffort workEffortId="TASK_TRUCK_PAINT"
+                workEffortTypeId="ROU_TASK"
+                workEffortPurposeTypeId="ROU_ASSEMBLING"
+                currentStatusId="ROU_ACTIVE"
+                workEffortName="Painting and Stickers"
+                description="Apply paint and decorative stickers"
+                revisionNumber="1"
+                estimatedMilliSeconds="3600000"
+                estimatedSetupMillis="0"/>
+
+    <WorkEffort workEffortId="TASK_TRUCK_PACK"
+                workEffortTypeId="ROU_TASK"
+                workEffortPurposeTypeId="ROU_ASSEMBLING"
+                currentStatusId="ROU_ACTIVE"
+                workEffortName="Quality Check and Packaging"
+                description="Final quality check and packaging"
+                revisionNumber="1"
+                estimatedMilliSeconds="1800000"
+                estimatedSetupMillis="0"/>
+
+    <!-- Link tasks to truck routing (sequence) -->
+    <WorkEffortAssoc workEffortIdFrom="ROUT_HHT_0002" workEffortIdTo="TASK_TRUCK_PREP"
+                     workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="10"
+                     fromDate="2025-01-01 00:00:00.000"/>
+
+    <WorkEffortAssoc workEffortIdFrom="ROUT_HHT_0002" workEffortIdTo="TASK_TRUCK_ASSEMBLY"
+                     workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="20"
+                     fromDate="2025-01-01 00:00:00.000"/>
+
+    <WorkEffortAssoc workEffortIdFrom="ROUT_HHT_0002" workEffortIdTo="TASK_TRUCK_PAINT"
+                     workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="30"
+                     fromDate="2025-01-01 00:00:00.000"/>
+
+    <WorkEffortAssoc workEffortIdFrom="ROUT_HHT_0002" workEffortIdTo="TASK_TRUCK_PACK"
+                     workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="40"
+                     fromDate="2025-01-01 00:00:00.000"/>
+
+    <!-- Associate truck routing to finished good -->
+    <WorkEffortGoodStandard workEffortId="ROUT_HHT_0002"
+                            productId="PRD_HHT_0002"
+                            workEffortGoodStdTypeId="ROU_PROD_TEMPLATE"
+                            statusId="WEGS_CREATED"
+                            fromDate="2025-01-01 00:00:00.000"/>
+
     <!-- ========================= -->
     <!-- 5) BILL OF MATERIALS (BOM) -->
     <!-- ========================= -->
+    <!-- BOM for Wooden Car -->
     <ProductAssoc productId="PRD_WOOD_CAR" productIdTo="CMP_WOOD_BLOCK"
                   productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000"
                   routingWorkEffortId="TASK_CUTTING_WOOD"
@@ -464,6 +669,37 @@
     <ProductAssoc productId="PRD_WOOD_CAR" productIdTo="CMP_BOX"
                   productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000"
                   routingWorkEffortId="TASK_PACKING_WOOD"
+                  sequenceNum="40" quantity="1.0" scrapFactor="0.00"/>
+
+    <!-- BOM for Toy Truck (BOM_HHT_0002) -->
+    <ProductAssoc productId="PRD_HHT_0002" productIdTo="CMP_PLASTIC_BODY"
+                  productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000"
+                  routingWorkEffortId="TASK_TRUCK_PREP"
+                  sequenceNum="10" quantity="1.0" scrapFactor="0.00"/>
+
+    <ProductAssoc productId="PRD_HHT_0002" productIdTo="CMP_AXLES"
+                  productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000"
+                  routingWorkEffortId="TASK_TRUCK_ASSEMBLY"
+                  sequenceNum="20" quantity="2.0" scrapFactor="0.00"/>
+
+    <ProductAssoc productId="PRD_HHT_0002" productIdTo="CMP_WHEELS"
+                  productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000"
+                  routingWorkEffortId="TASK_TRUCK_ASSEMBLY"
+                  sequenceNum="25" quantity="6.0" scrapFactor="0.00"/>
+
+    <ProductAssoc productId="PRD_HHT_0002" productIdTo="CMP_PAINT"
+                  productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000"
+                  routingWorkEffortId="TASK_TRUCK_PAINT"
+                  sequenceNum="30" quantity="0.2" scrapFactor="0.00"/>
+
+    <ProductAssoc productId="PRD_HHT_0002" productIdTo="CMP_STICKERS"
+                  productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000"
+                  routingWorkEffortId="TASK_TRUCK_PAINT"
+                  sequenceNum="35" quantity="1.0" scrapFactor="0.00"/>
+
+    <ProductAssoc productId="PRD_HHT_0002" productIdTo="CMP_BOX"
+                  productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000"
+                  routingWorkEffortId="TASK_TRUCK_PACK"
                   sequenceNum="40" quantity="1.0" scrapFactor="0.00"/>
 
     <!-- ================================================================== -->

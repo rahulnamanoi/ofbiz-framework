@@ -80,7 +80,7 @@
     <PartyContactMechPurpose contactMechPurposeTypeId="PRIMARY_PHONE" partyId="GRH_CX" contactMechId="GRH_PHONE_01" fromDate="2024-01-01 00:00:00.000"/>
 
 
- <!-- ============================================ -->
+    <!-- ============================================ -->
     <!-- LeatherLux Production Plant Facility Setup -->
     <!-- ============================================ -->
     <!-- Main Production Plant Facility -->
@@ -226,6 +226,20 @@
                      productCategoryId="CAT_WOMEN_SLING"
                      productCategoryTypeId="CATALOG_CATEGORY"/>
     <!-- ========================================= -->
+    <!-- 🟢 NEW CATEGORY: Men Collection -->
+    <!-- ========================================= -->
+    <ProductCategory categoryName="Men Collection"
+                     longDescription="Premium leather accessories designed for men"
+                     primaryParentCategoryId="CAT_LEATHER"
+                     productCategoryId="CAT_MEN"
+                     productCategoryTypeId="CATALOG_CATEGORY"/>
+    <!-- 🟢 NEW: Men Wallets Category -->
+    <ProductCategory categoryName="Men Wallets"
+                     longDescription="Premium leather wallets for men"
+                     primaryParentCategoryId="CAT_MEN"
+                     productCategoryId="CAT_MEN_WALLETS"
+                     productCategoryTypeId="CATALOG_CATEGORY"/>
+    <!-- ========================================= -->
     <!-- CATALOG CATEGORY ASSOCIATIONS -->
     <!-- ========================================= -->
     <!-- Catalog Browse Root -->
@@ -245,199 +259,350 @@
     <ProductCategoryRollup fromDate="2024-01-01 00:00:00.0"
                            parentProductCategoryId="CAT_WOMEN"
                            productCategoryId="CAT_WOMEN_SLING"/>
+    <!-- 🟢 NEW: Root to Men Collection -->
+    <ProductCategoryRollup fromDate="2025-01-01 00:00:00.0"
+                           parentProductCategoryId="CAT_LEATHER"
+                           productCategoryId="CAT_MEN"/>
+    <!-- 🟢 NEW: Men Collection to Men Wallets -->
+    <ProductCategoryRollup fromDate="2025-01-01 00:00:00.0"
+                           parentProductCategoryId="CAT_MEN"
+                           productCategoryId="CAT_MEN_WALLETS"/>
 
-                            <!-- =========================
-       1) FINISHED PRODUCT
-       ========================= -->
-  <Product productId="PRD_WSLING_001"
-           productTypeId="FINISHED_GOOD"
-           internalName="Women Sling Bag - Classic Tan"
-           productName="Women Sling Bag - Classic Tan"
-           description="Medium-size leather sling bag with gold strap"
-           isVirtual="N" isVariant="N" taxable="Y"/>
-  <GoodIdentification productId="PRD_WSLING_001"
-                      goodIdentificationTypeId="SKU"
-                      idValue="PRD_WSLING_001"/>
-  <!-- Category membership -->
-  <ProductCategoryMember productId="PRD_WSLING_001"
-                         productCategoryId="CAT_WOMEN_SLING"
-                         fromDate="2025-01-01 00:00:00.000"/>
-  <!-- =========================
-       2) RAW-MATERIAL PRODUCTS
-       ========================= -->
-  <Product productId="CMP_LEATHER_SHEET"
-           productTypeId="RAW_MATERIAL"
-           internalName="Leather Sheet"
-           productName="Leather Sheet"
-           description="Primary raw leather sheet"
-           isVirtual="N" isVariant="N" billOfMaterialLevel="1"/>
-  <Product productId="CMP_ZIPPER"
-           productTypeId="RAW_MATERIAL"
-           internalName="Zipper"
-           productName="Zipper"
-           description="Standard zipper for sling bags"
-           isVirtual="N" isVariant="N" billOfMaterialLevel="1"/>
-  <Product productId="CMP_THREAD"
-           productTypeId="RAW_MATERIAL"
-           internalName="Thread (Brown/Black)"
-           productName="Thread (Brown/Black)"
-           description="Thread for stitching"
-           isVirtual="N" isVariant="N" billOfMaterialLevel="1"/>
-  <Product productId="CMP_BUTTON"
-           productTypeId="RAW_MATERIAL"
-           internalName="Magnetic Button"
-           productName="Magnetic Button"
-           description="Magnetic button for bag closure"
-           isVirtual="N" isVariant="N" billOfMaterialLevel="1"/>
-  <!-- =========================
-       3) SUPPLIER PRODUCTS (RM only, MOQ=0, dated 2025-01-01)
-       ========================= -->
-  <SupplierProduct availableFromDate="2025-01-01 00:00:00.000"
-                   canDropShip="N"
-                   currencyUomId="INR"
-                   lastPrice="1500.00"
-                   minimumOrderQuantity="0.000000"
-                   partyId="JOHN_SUPPLIER"
-                   productId="CMP_LEATHER_SHEET"
-                   supplierPrefOrderId="10_MAIN_SUPPL"
-                   supplierProductId="LEAT-SHEET"
-                   supplierProductName="Leather Sheet"/>
-  <SupplierProduct availableFromDate="2025-01-01 00:00:00.000"
-                   canDropShip="N"
-                   currencyUomId="INR"
-                   lastPrice="25.00"
-                   minimumOrderQuantity="0.000000"
-                   partyId="JOHN_SUPPLIER"
-                   productId="CMP_ZIPPER"
-                   supplierPrefOrderId="10_MAIN_SUPPL"
-                   supplierProductId="ZIP-STD"
-                   supplierProductName="Standard Zipper"/>
-  <SupplierProduct availableFromDate="2025-01-01 00:00:00.000"
-                   canDropShip="N"
-                   currencyUomId="INR"
-                   lastPrice="15.00"
-                   minimumOrderQuantity="0.000000"
-                   partyId="JOHN_SUPPLIER"
-                   productId="CMP_THREAD"
-                   supplierPrefOrderId="10_MAIN_SUPPL"
-                   supplierProductId="THRD-BRBLK"
-                   supplierProductName="Thread (Brown/Black)"/>
-  <SupplierProduct availableFromDate="2025-01-01 00:00:00.000"
-                   canDropShip="N"
-                   currencyUomId="INR"
-                   lastPrice="40.00"
-                   minimumOrderQuantity="0.000000"
-                   partyId="JOHN_SUPPLIER"
-                   productId="CMP_BUTTON"
-                   supplierPrefOrderId="10_MAIN_SUPPL"
-                   supplierProductId="MBUTTON"
-                   supplierProductName="Magnetic Button"/>
-  <!-- =========================
-       4) FACILITY INVENTORY RULES
-       ========================= -->
-  <!-- Finished good now has a facility record -->
-  <ProductFacility productId="PRD_WSLING_001"    facilityId="LLX_MAIN_PLANT" minimumStock="10" reorderQuantity="5"  daysToShip="1"/>
-  <!-- Components keep minimumStock=25 -->
-  <ProductFacility productId="CMP_LEATHER_SHEET" facilityId="LLX_MAIN_PLANT" minimumStock="25" reorderQuantity="10" daysToShip="1"/>
-  <ProductFacility productId="CMP_ZIPPER"        facilityId="LLX_MAIN_PLANT" minimumStock="25" reorderQuantity="25" daysToShip="1"/>
-  <ProductFacility productId="CMP_THREAD"        facilityId="LLX_MAIN_PLANT" minimumStock="25" reorderQuantity="10" daysToShip="1"/>
-  <ProductFacility productId="CMP_BUTTON"        facilityId="LLX_MAIN_PLANT" minimumStock="25" reorderQuantity="10" daysToShip="1"/>
-                  <!-- =============================
-       Routing: Sling Bag Production
-       ============================= -->
-  <WorkEffort workEffortId="ROUTE_WSLING"
-              workEffortTypeId="ROUTING"
-              currentStatusId="ROU_ACTIVE"
-              workEffortName="Sling Bag Production Route"
-              description="Complete production steps for Women Sling Bag"
-              revisionNumber="1"
-              quantityToProduce="0"/>
+    <!-- =========================
+1) FINISHED PRODUCT
+========================= -->
+    <Product productId="PRD_WSLING_001"
+             productTypeId="FINISHED_GOOD"
+             internalName="Women Sling Bag - Classic Tan"
+             productName="Women Sling Bag - Classic Tan"
+             description="Medium-size leather sling bag with gold strap"
+             isVirtual="N" isVariant="N" taxable="Y"/>
+    <GoodIdentification productId="PRD_WSLING_001"
+                        goodIdentificationTypeId="SKU"
+                        idValue="PRD_WSLING_001"/>
+    <!-- Category membership -->
+    <ProductCategoryMember productId="PRD_WSLING_001"
+                           productCategoryId="CAT_WOMEN_SLING"
+                           fromDate="2025-01-01 00:00:00.000"/>
 
+    <!-- ========================================= -->
+    <!-- 🟢 NEW PRODUCT: Men's Wallet -->
+    <!-- ========================================= -->
+    <Product productId="PRD_LL_0002"
+             productTypeId="FINISHED_GOOD"
+             internalName="LeatherLux Men's Wallet"
+             productName="LeatherLux Men's Wallet"
+             description="Premium leather wallet with compartments for cards and cash"
+             isVirtual="N" isVariant="N" taxable="Y"/>
+    <GoodIdentification productId="PRD_LL_0002"
+                        goodIdentificationTypeId="SKU"
+                        idValue="PRD_LL_0002"/>
+    <!-- 🟢 Category membership for wallet -->
+    <ProductCategoryMember productId="PRD_LL_0002"
+                           productCategoryId="CAT_MEN_WALLETS"
+                           fromDate="2025-01-01 00:00:00.000"/>
 
-              
-  <!-- Tasks -->
-  <WorkEffort workEffortId="TASK_CUTTING_WB"
-              workEffortTypeId="ROU_TASK"
-              workEffortPurposeTypeId="ROU_ASSEMBLING"
-              currentStatusId="ROU_ACTIVE"
-              workEffortName="Leather Cutting"
-              description="Cut leather pieces for body, flap, and strap"
-              revisionNumber="1"
-              estimatedMilliSeconds="7200000"
-              estimatedSetupMillis="0"/>
-  <WorkEffort workEffortId="TASK_STITCHING_WB"
-              workEffortTypeId="ROU_TASK"
-              workEffortPurposeTypeId="ROU_ASSEMBLING"
-              currentStatusId="ROU_ACTIVE"
-              workEffortName="Stitching"
-              description="Assemble with thread and lining"
-              revisionNumber="1"
-              estimatedMilliSeconds="10800000"
-              estimatedSetupMillis="0"/>
-  <WorkEffort workEffortId="TASK_HARDWARE_WB"
-              workEffortTypeId="ROU_TASK"
-              workEffortPurposeTypeId="ROU_ASSEMBLING"
-              currentStatusId="ROU_ACTIVE"
-              workEffortName="Hardware Fixing"
-              description="Attach buckles, zipper, and strap rings"
-              revisionNumber="1"
-              estimatedMilliSeconds="3600000"
-              estimatedSetupMillis="0"/>
-  <WorkEffort workEffortId="TASK_FINISHING_WB"
-              workEffortTypeId="ROU_TASK"
-              workEffortPurposeTypeId="ROU_ASSEMBLING"
-              currentStatusId="ROU_ACTIVE"
-              workEffortName="Finishing And Branding"
-              description="Edge finishing, emboss logo, tag"
-              revisionNumber="1"
-              estimatedMilliSeconds="3600000"
-              estimatedSetupMillis="0"/>
+    <!-- =========================
+         2) RAW-MATERIAL PRODUCTS
+         ========================= -->
+    <Product productId="CMP_LEATHER_SHEET"
+             productTypeId="RAW_MATERIAL"
+             internalName="Leather Sheet"
+             productName="Leather Sheet"
+             description="Primary raw leather sheet"
+             isVirtual="N" isVariant="N" billOfMaterialLevel="1"/>
+    <Product productId="CMP_ZIPPER"
+             productTypeId="RAW_MATERIAL"
+             internalName="Zipper"
+             productName="Zipper"
+             description="Standard zipper for sling bags"
+             isVirtual="N" isVariant="N" billOfMaterialLevel="1"/>
+    <Product productId="CMP_THREAD"
+             productTypeId="RAW_MATERIAL"
+             internalName="Thread (Brown/Black)"
+             productName="Thread (Brown/Black)"
+             description="Thread for stitching"
+             isVirtual="N" isVariant="N" billOfMaterialLevel="1"/>
+    <Product productId="CMP_BUTTON"
+             productTypeId="RAW_MATERIAL"
+             internalName="Magnetic Button"
+             productName="Magnetic Button"
+             description="Magnetic button for bag closure"
+             isVirtual="N" isVariant="N" billOfMaterialLevel="1"/>
 
+    <!-- ========================================= -->
+    <!-- 🟢 NEW RAW MATERIALS for Wallet -->
+    <!-- ========================================= -->
+    <Product productId="CMP_INNER_LINING"
+             productTypeId="RAW_MATERIAL"
+             internalName="Inner Lining"
+             productName="Inner Lining"
+             description="Soft inner lining material for wallets"
+             isVirtual="N" isVariant="N" billOfMaterialLevel="1"/>
+    <Product productId="CMP_BUTTON_CLIP"
+             productTypeId="RAW_MATERIAL"
+             internalName="Button Clip"
+             productName="Button Clip"
+             description="Metal button clip for wallet closure"
+             isVirtual="N" isVariant="N" billOfMaterialLevel="1"/>
 
+    <!-- =========================
+         3) SUPPLIER PRODUCTS (RM only, MOQ=0, dated 2025-01-01)
+         ========================= -->
+    <SupplierProduct availableFromDate="2025-01-01 00:00:00.000"
+                     canDropShip="N"
+                     currencyUomId="INR"
+                     lastPrice="1500.00"
+                     minimumOrderQuantity="0.000000"
+                     partyId="JOHN_SUPPLIER"
+                     productId="CMP_LEATHER_SHEET"
+                     supplierPrefOrderId="10_MAIN_SUPPL"
+                     supplierProductId="LEAT-SHEET"
+                     supplierProductName="Leather Sheet"/>
+    <SupplierProduct availableFromDate="2025-01-01 00:00:00.000"
+                     canDropShip="N"
+                     currencyUomId="INR"
+                     lastPrice="25.00"
+                     minimumOrderQuantity="0.000000"
+                     partyId="JOHN_SUPPLIER"
+                     productId="CMP_ZIPPER"
+                     supplierPrefOrderId="10_MAIN_SUPPL"
+                     supplierProductId="ZIP-STD"
+                     supplierProductName="Standard Zipper"/>
+    <SupplierProduct availableFromDate="2025-01-01 00:00:00.000"
+                     canDropShip="N"
+                     currencyUomId="INR"
+                     lastPrice="15.00"
+                     minimumOrderQuantity="0.000000"
+                     partyId="JOHN_SUPPLIER"
+                     productId="CMP_THREAD"
+                     supplierPrefOrderId="10_MAIN_SUPPL"
+                     supplierProductId="THRD-BRBLK"
+                     supplierProductName="Thread (Brown/Black)"/>
+    <SupplierProduct availableFromDate="2025-01-01 00:00:00.000"
+                     canDropShip="N"
+                     currencyUomId="INR"
+                     lastPrice="40.00"
+                     minimumOrderQuantity="0.000000"
+                     partyId="JOHN_SUPPLIER"
+                     productId="CMP_BUTTON"
+                     supplierPrefOrderId="10_MAIN_SUPPL"
+                     supplierProductId="MBUTTON"
+                     supplierProductName="Magnetic Button"/>
 
-  <!-- Link tasks to routing (sequence) -->
-  <WorkEffortAssoc workEffortIdFrom="ROUTE_WSLING" workEffortIdTo="TASK_CUTTING_WB"
-                   workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="10"
-                   fromDate="2025-01-01 00:00:00.000"/>
-  <WorkEffortAssoc workEffortIdFrom="ROUTE_WSLING" workEffortIdTo="TASK_STITCHING_WB"
-                   workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="20"
-                   fromDate="2025-01-01 00:00:00.000"/>
-  <WorkEffortAssoc workEffortIdFrom="ROUTE_WSLING" workEffortIdTo="TASK_HARDWARE_WB"
-                   workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="30"
-                   fromDate="2025-01-01 00:00:00.000"/>
-  <WorkEffortAssoc workEffortIdFrom="ROUTE_WSLING" workEffortIdTo="TASK_FINISHING_WB"
-                   workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="40"
-                   fromDate="2025-01-01 00:00:00.000"/>
-  <!-- Associate routing to finished good -->
-  <WorkEffortGoodStandard workEffortId="ROUTE_WSLING"
-                          productId="PRD_WSLING_001"
-                          workEffortGoodStdTypeId="ROU_PROD_TEMPLATE"
-                          statusId="WEGS_CREATED"
-                          fromDate="2025-01-01 00:00:00.000"/>
-   
+    <!-- ========================================= -->
+    <!-- 🟢 NEW SUPPLIER PRODUCTS for Wallet Components -->
+    <!-- ========================================= -->
+    <SupplierProduct availableFromDate="2025-01-01 00:00:00.000"
+                     canDropShip="N"
+                     currencyUomId="INR"
+                     lastPrice="200.00"
+                     minimumOrderQuantity="0.000000"
+                     partyId="JOHN_SUPPLIER"
+                     productId="CMP_INNER_LINING"
+                     supplierPrefOrderId="10_MAIN_SUPPL"
+                     supplierProductId="LINING-01"
+                     supplierProductName="Inner Lining Material"/>
+    <SupplierProduct availableFromDate="2025-01-01 00:00:00.000"
+                     canDropShip="N"
+                     currencyUomId="INR"
+                     lastPrice="35.00"
+                     minimumOrderQuantity="0.000000"
+                     partyId="JOHN_SUPPLIER"
+                     productId="CMP_BUTTON_CLIP"
+                     supplierPrefOrderId="10_MAIN_SUPPL"
+                     supplierProductId="CLIP-01"
+                     supplierProductName="Button Clip"/>
 
+    <!-- =========================
+         4) FACILITY INVENTORY RULES
+         ========================= -->
+    <!-- Finished good now has a facility record -->
+    <ProductFacility productId="PRD_WSLING_001"    facilityId="LLX_MAIN_PLANT" minimumStock="10" reorderQuantity="5"  daysToShip="1"/>
 
-  <!-- =========================
-       5) BILL OF MATERIALS (BOM)
-       ========================= -->
-  <ProductAssoc productId="PRD_WSLING_001" productIdTo="CMP_LEATHER_SHEET"
-                productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000" routingWorkEffortId="TASK_CUTTING_WB"
-                sequenceNum="10" quantity="1.0" scrapFactor="0.00"/>
-  <ProductAssoc productId="PRD_WSLING_001" productIdTo="CMP_ZIPPER"
-                productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000" routingWorkEffortId="TASK_STITCHING_WB"
-                sequenceNum="20" quantity="1.0" scrapFactor="0.00"/>
-  <ProductAssoc productId="PRD_WSLING_001" productIdTo="CMP_THREAD"
-                productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000" routingWorkEffortId="TASK_HARDWARE_WB"
-                sequenceNum="30" quantity="1.0" scrapFactor="0.00"/>
-  <ProductAssoc productId="PRD_WSLING_001" productIdTo="CMP_BUTTON"
-                productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000" routingWorkEffortId="TASK_FINISHING_WB"
-                sequenceNum="40" quantity="1.0" scrapFactor="0.00"/>
+    <!-- 🟢 NEW: Facility inventory for Men's Wallet -->
+    <ProductFacility productId="PRD_LL_0002" facilityId="LLX_MAIN_PLANT" minimumStock="20" reorderQuantity="10" daysToShip="1"/>
+
+    <!-- Components keep minimumStock=25 -->
+    <ProductFacility productId="CMP_LEATHER_SHEET" facilityId="LLX_MAIN_PLANT" minimumStock="25" reorderQuantity="10" daysToShip="1"/>
+    <ProductFacility productId="CMP_ZIPPER"        facilityId="LLX_MAIN_PLANT" minimumStock="25" reorderQuantity="25" daysToShip="1"/>
+    <ProductFacility productId="CMP_THREAD"        facilityId="LLX_MAIN_PLANT" minimumStock="25" reorderQuantity="10" daysToShip="1"/>
+    <ProductFacility productId="CMP_BUTTON"        facilityId="LLX_MAIN_PLANT" minimumStock="25" reorderQuantity="10" daysToShip="1"/>
+
+    <!-- 🟢 NEW: Facility inventory for wallet components -->
+    <ProductFacility productId="CMP_INNER_LINING" facilityId="LLX_MAIN_PLANT" minimumStock="30" reorderQuantity="15" daysToShip="1"/>
+    <ProductFacility productId="CMP_BUTTON_CLIP" facilityId="LLX_MAIN_PLANT" minimumStock="30" reorderQuantity="15" daysToShip="1"/>
+
+    <!-- =============================
+Routing: Sling Bag Production
+============================= -->
+    <WorkEffort workEffortId="ROUTE_WSLING"
+                workEffortTypeId="ROUTING"
+                currentStatusId="ROU_ACTIVE"
+                workEffortName="Sling Bag Production Route"
+                description="Complete production steps for Women Sling Bag"
+                revisionNumber="1"
+                quantityToProduce="0"/>
 
 
 
+    <!-- Tasks -->
+    <WorkEffort workEffortId="TASK_CUTTING_WB"
+                workEffortTypeId="ROU_TASK"
+                workEffortPurposeTypeId="ROU_ASSEMBLING"
+                currentStatusId="ROU_ACTIVE"
+                workEffortName="Leather Cutting"
+                description="Cut leather pieces for body, flap, and strap"
+                revisionNumber="1"
+                estimatedMilliSeconds="7200000"
+                estimatedSetupMillis="0"/>
+    <WorkEffort workEffortId="TASK_STITCHING_WB"
+                workEffortTypeId="ROU_TASK"
+                workEffortPurposeTypeId="ROU_ASSEMBLING"
+                currentStatusId="ROU_ACTIVE"
+                workEffortName="Stitching"
+                description="Assemble with thread and lining"
+                revisionNumber="1"
+                estimatedMilliSeconds="10800000"
+                estimatedSetupMillis="0"/>
+    <WorkEffort workEffortId="TASK_HARDWARE_WB"
+                workEffortTypeId="ROU_TASK"
+                workEffortPurposeTypeId="ROU_ASSEMBLING"
+                currentStatusId="ROU_ACTIVE"
+                workEffortName="Hardware Fixing"
+                description="Attach buckles, zipper, and strap rings"
+                revisionNumber="1"
+                estimatedMilliSeconds="3600000"
+                estimatedSetupMillis="0"/>
+    <WorkEffort workEffortId="TASK_FINISHING_WB"
+                workEffortTypeId="ROU_TASK"
+                workEffortPurposeTypeId="ROU_ASSEMBLING"
+                currentStatusId="ROU_ACTIVE"
+                workEffortName="Finishing And Branding"
+                description="Edge finishing, emboss logo, tag"
+                revisionNumber="1"
+                estimatedMilliSeconds="3600000"
+                estimatedSetupMillis="0"/>
 
 
-   <!-- ================================================================== -->
+
+    <!-- Link tasks to routing (sequence) -->
+    <WorkEffortAssoc workEffortIdFrom="ROUTE_WSLING" workEffortIdTo="TASK_CUTTING_WB"
+                     workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="10"
+                     fromDate="2025-01-01 00:00:00.000"/>
+    <WorkEffortAssoc workEffortIdFrom="ROUTE_WSLING" workEffortIdTo="TASK_STITCHING_WB"
+                     workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="20"
+                     fromDate="2025-01-01 00:00:00.000"/>
+    <WorkEffortAssoc workEffortIdFrom="ROUTE_WSLING" workEffortIdTo="TASK_HARDWARE_WB"
+                     workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="30"
+                     fromDate="2025-01-01 00:00:00.000"/>
+    <WorkEffortAssoc workEffortIdFrom="ROUTE_WSLING" workEffortIdTo="TASK_FINISHING_WB"
+                     workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="40"
+                     fromDate="2025-01-01 00:00:00.000"/>
+    <!-- Associate routing to finished good -->
+    <WorkEffortGoodStandard workEffortId="ROUTE_WSLING"
+                            productId="PRD_WSLING_001"
+                            workEffortGoodStdTypeId="ROU_PROD_TEMPLATE"
+                            statusId="WEGS_CREATED"
+                            fromDate="2025-01-01 00:00:00.000"/>
+
+    <!-- ========================================= -->
+    <!-- 🟢 NEW ROUTING: Wallet Production -->
+    <!-- ========================================= -->
+    <WorkEffort workEffortId="ROUT_LL_0002"
+                workEffortTypeId="ROUTING"
+                currentStatusId="ROU_ACTIVE"
+                workEffortName="Wallet Stitching And Finishing"
+                description="Complete production steps for Men's Wallet"
+                revisionNumber="1"
+                quantityToProduce="0"/>
+
+    <!-- 🟢 NEW: Wallet Production Tasks -->
+    <WorkEffort workEffortId="TASK_CUT_WALLET"
+                workEffortTypeId="ROU_TASK"
+                workEffortPurposeTypeId="ROU_ASSEMBLING"
+                currentStatusId="ROU_ACTIVE"
+                workEffortName="Leather Pattern Cutting"
+                description="Cut leather pieces for wallet body and compartments"
+                revisionNumber="1"
+                estimatedMilliSeconds="3600000"
+                estimatedSetupMillis="0"/>
+    <WorkEffort workEffortId="TASK_STITCH_WALLET"
+                workEffortTypeId="ROU_TASK"
+                workEffortPurposeTypeId="ROU_ASSEMBLING"
+                currentStatusId="ROU_ACTIVE"
+                workEffortName="Wallet Stitching"
+                description="Stitch wallet compartments and inner lining"
+                revisionNumber="1"
+                estimatedMilliSeconds="5400000"
+                estimatedSetupMillis="0"/>
+    <WorkEffort workEffortId="TASK_FINISH_WALLET"
+                workEffortTypeId="ROU_TASK"
+                workEffortPurposeTypeId="ROU_ASSEMBLING"
+                currentStatusId="ROU_ACTIVE"
+                workEffortName="Wallet Finishing"
+                description="Add button clip, emboss logo, quality check"
+                revisionNumber="1"
+                estimatedMilliSeconds="1800000"
+                estimatedSetupMillis="0"/>
+
+    <!-- 🟢 Link wallet tasks to routing -->
+    <WorkEffortAssoc workEffortIdFrom="ROUT_LL_0002" workEffortIdTo="TASK_CUT_WALLET"
+                     workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="10"
+                     fromDate="2025-01-01 00:00:00.000"/>
+    <WorkEffortAssoc workEffortIdFrom="ROUT_LL_0002" workEffortIdTo="TASK_STITCH_WALLET"
+                     workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="20"
+                     fromDate="2025-01-01 00:00:00.000"/>
+    <WorkEffortAssoc workEffortIdFrom="ROUT_LL_0002" workEffortIdTo="TASK_FINISH_WALLET"
+                     workEffortAssocTypeId="ROUTING_COMPONENT" sequenceNum="30"
+                     fromDate="2025-01-01 00:00:00.000"/>
+
+    <!-- 🟢 Associate routing to wallet product -->
+    <WorkEffortGoodStandard workEffortId="ROUT_LL_0002"
+                            productId="PRD_LL_0002"
+                            workEffortGoodStdTypeId="ROU_PROD_TEMPLATE"
+                            statusId="WEGS_CREATED"
+                            fromDate="2025-01-01 00:00:00.000"/>
+
+
+
+    <!-- =========================
+         5) BILL OF MATERIALS (BOM)
+         ========================= -->
+    <ProductAssoc productId="PRD_WSLING_001" productIdTo="CMP_LEATHER_SHEET"
+                  productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000" routingWorkEffortId="TASK_CUTTING_WB"
+                  sequenceNum="10" quantity="1.0" scrapFactor="0.00"/>
+    <ProductAssoc productId="PRD_WSLING_001" productIdTo="CMP_ZIPPER"
+                  productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000" routingWorkEffortId="TASK_STITCHING_WB"
+                  sequenceNum="20" quantity="1.0" scrapFactor="0.00"/>
+    <ProductAssoc productId="PRD_WSLING_001" productIdTo="CMP_THREAD"
+                  productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000" routingWorkEffortId="TASK_HARDWARE_WB"
+                  sequenceNum="30" quantity="1.0" scrapFactor="0.00"/>
+    <ProductAssoc productId="PRD_WSLING_001" productIdTo="CMP_BUTTON"
+                  productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000" routingWorkEffortId="TASK_FINISHING_WB"
+                  sequenceNum="40" quantity="1.0" scrapFactor="0.00"/>
+
+    <!-- ========================================= -->
+    <!-- 🟢 NEW BOM: Men's Wallet Components -->
+    <!-- ========================================= -->
+    <ProductAssoc productId="PRD_LL_0002" productIdTo="CMP_LEATHER_SHEET"
+                  productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000" routingWorkEffortId="TASK_CUT_WALLET"
+                  sequenceNum="10" quantity="0.5" scrapFactor="0.00"/>
+    <ProductAssoc productId="PRD_LL_0002" productIdTo="CMP_INNER_LINING"
+                  productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000" routingWorkEffortId="TASK_STITCH_WALLET"
+                  sequenceNum="20" quantity="1.0" scrapFactor="0.00"/>
+    <ProductAssoc productId="PRD_LL_0002" productIdTo="CMP_THREAD"
+                  productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000" routingWorkEffortId="TASK_STITCH_WALLET"
+                  sequenceNum="30" quantity="1.0" scrapFactor="0.00"/>
+    <ProductAssoc productId="PRD_LL_0002" productIdTo="CMP_BUTTON_CLIP"
+                  productAssocTypeId="MANUF_COMPONENT" fromDate="2025-01-01 00:00:00.000" routingWorkEffortId="TASK_FINISH_WALLET"
+                  sequenceNum="40" quantity="1.0" scrapFactor="0.00"/>
+
+
+
+
+
+    <!-- ================================================================== -->
     <!-- GL ACCOUNT CLASSES -->
     <!-- ================================================================== -->
     <GlAccountClass glAccountClassId="DEBIT" description="Debit" sequenceNum="100"/>
@@ -549,24 +714,19 @@
     <!-- GL JOURNAL (must come before PartyAcctgPreference) -->
     <!-- ================================================================== -->
     <GlJournal
-        organizationPartyId="LEATHERLUX_ORG"
-        glJournalId="LX_ERR_JRN"
-        glJournalName="LeatherLux Suspense Transactions"/>
+            organizationPartyId="LEATHERLUX_ORG"
+            glJournalId="LX_ERR_JRN"
+            glJournalName="LeatherLux Suspense Transactions"/>
     <!-- ================================================================== -->
     <!-- ACCOUNTING PREFERENCES -->
     <!-- ================================================================== -->
     <PartyAcctgPreference
-        partyId="LEATHERLUX_ORG"
-        baseCurrencyUomId="INR"
-        cogsMethodId="COGS_AVG_COST"
-        invoiceIdPrefix="LXINV"
-        orderIdPrefix="LXORD"
-        quoteIdPrefix="LXQ"
-        errorGlJournalId="LX_ERR_JRN"/>
+            partyId="LEATHERLUX_ORG"
+            baseCurrencyUomId="INR"
+            cogsMethodId="COGS_AVG_COST"
+            invoiceIdPrefix="LXINV"
+            orderIdPrefix="LXORD"
+            quoteIdPrefix="LXQ"
+            errorGlJournalId="LX_ERR_JRN"/>
 
-        </entity-engine-xml>
-
-
-
-
-
+</entity-engine-xml>
