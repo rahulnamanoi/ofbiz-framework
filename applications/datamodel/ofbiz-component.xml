@@ -65,6 +65,9 @@ under the License.
     <entity-resource type="data" reader-name="demo" loader="main" location="data/demo/MarketingDemoData.xml"/>
     <entity-resource type="data" reader-name="demo" loader="main" location="data/demo/CommonExtDemoData.xml"/>
 
+    <!-- Tenant One Seed Data -->
+    <entity-resource type="data" reader-name="tenant-one" loader="main" location="data/tenant-one/TenantOneDemoData.xml"/>
+
     <!-- Ext Demo Data -->
     <entity-resource type="data" reader-name="ext-demo" loader="main" location="data/ext-demo/OfbizSetupShippingData.xml"/>
 
