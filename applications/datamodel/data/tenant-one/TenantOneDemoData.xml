@@ -5,7 +5,8 @@
 	<!-- ============================================ -->
 	<!-- Main Organization Party -->
 	<Party partyId="LEATHERLUX_ORG" preferredCurrencyUomId="INR" partyTypeId="PARTY_GROUP" statusId="PARTY_ENABLED"/>
-	<PartyRole partyId="LEATHERLUX_ORG" roleTypeId="BILL_FROM_VENDOR"/>
+    <PartyGroup partyId="LEATHERLUX_ORG" groupName="LeatherLux Pvt. Ltd."/>
+    <PartyRole partyId="LEATHERLUX_ORG" roleTypeId="BILL_FROM_VENDOR"/>
 	<PartyRole partyId="LEATHERLUX_ORG" roleTypeId="BILL_TO_CUSTOMER"/>
 	<PartyRole partyId="LEATHERLUX_ORG" roleTypeId="INTERNAL_ORGANIZATIO"/>
 	<PartyRole partyId="LEATHERLUX_ORG" roleTypeId="_NA_"/>
