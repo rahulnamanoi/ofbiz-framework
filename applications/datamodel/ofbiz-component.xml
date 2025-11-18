@@ -67,6 +67,8 @@ under the License.
 
     <!-- Tenant One Seed Data -->
     <entity-resource type="data" reader-name="tenant-one" loader="main" location="data/tenant-one/TenantOneDemoData.xml"/>
+
+    <!-- Tenant Two Seed Data -->
     <entity-resource type="data" reader-name="tenant-two" loader="main" location="data/tenant-two/TenantTwoDemoData.xml"/>
 
     <!-- Ext Demo Data -->
