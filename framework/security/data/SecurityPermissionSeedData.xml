@@ -35,6 +35,42 @@ under the License.
     <SecurityGroup groupId="SUPER" description="Super admin group, has all *_ADMIN permission loaded as seed data" groupName="Super"/>
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="SUPER" permissionId="OFBTOOLS_VIEW"/>
 
+    <!-- Asset maintenance permissions -->
+    <SecurityPermission permissionId="ASSETMAINT_ADMIN" description="ALL operations in Asset Maintenance."/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="SUPER" permissionId="ASSETMAINT_ADMIN"/>
+
+    <!-- Business seed security groups -->
+    <SecurityGroup groupId="BUSINESS_ADMIN" description="All business modules including order and asset maintenance." groupName="Business Admin"/>
+    <SecurityGroup groupId="PRODUCTION_MANAGER" description="Product manager with catalog, facility, manufacturing, asset maintenance, and party access." groupName="Product Manager"/>
+    <SecurityGroup groupId="PROCUREMENT_MANAGER" description="Procurement manager with party, facility, order, and catalog access." groupName="Procurement Manager"/>
+    <SecurityGroup groupId="CATALOG_MANAGER" description="Catalog manager with catalog and party access." groupName="Catalog Manager"/>
+
+    <!-- Business seed security group permissions -->
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="BUSINESS_ADMIN" permissionId="PARTYMGR_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="BUSINESS_ADMIN" permissionId="FACILITY_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="BUSINESS_ADMIN" permissionId="ORDERMGR_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="BUSINESS_ADMIN" permissionId="CATALOG_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="BUSINESS_ADMIN" permissionId="MANUFACTURING_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="BUSINESS_ADMIN" permissionId="ASSETMAINT_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="BUSINESS_ADMIN" permissionId="OFBTOOLS_VIEW"/>
+
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PRODUCTION_MANAGER" permissionId="PARTYMGR_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PRODUCTION_MANAGER" permissionId="FACILITY_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PRODUCTION_MANAGER" permissionId="CATALOG_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PRODUCTION_MANAGER" permissionId="MANUFACTURING_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PRODUCTION_MANAGER" permissionId="ASSETMAINT_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PRODUCTION_MANAGER" permissionId="OFBTOOLS_VIEW"/>
+
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PROCUREMENT_MANAGER" permissionId="PARTYMGR_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PROCUREMENT_MANAGER" permissionId="FACILITY_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PROCUREMENT_MANAGER" permissionId="ORDERMGR_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PROCUREMENT_MANAGER" permissionId="CATALOG_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PROCUREMENT_MANAGER" permissionId="OFBTOOLS_VIEW"/>
+
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="CATALOG_MANAGER" permissionId="PARTYMGR_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="CATALOG_MANAGER" permissionId="CATALOG_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="CATALOG_MANAGER" permissionId="OFBTOOLS_VIEW"/>
+
     <!-- System UserLogin Account - see additional data in SecurityExtData -->
     <UserLogin userLoginId="system" enabled="N" isSystem="Y"/>
     <UserLoginSecurityGroup groupId="SUPER" userLoginId="system" fromDate="2001-01-01 12:00:00.0"/>
