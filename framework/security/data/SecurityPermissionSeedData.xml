@@ -52,20 +52,24 @@ under the License.
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="BUSINESS_ADMIN" permissionId="CATALOG_ADMIN"/>
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="BUSINESS_ADMIN" permissionId="MANUFACTURING_ADMIN"/>
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="BUSINESS_ADMIN" permissionId="ASSETMAINT_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="BUSINESS_ADMIN" permissionId="OFBTOOLS_VIEW"/>
 
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PRODUCT_MANAGER" permissionId="PARTYMGR_ADMIN"/>
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PRODUCT_MANAGER" permissionId="FACILITY_ADMIN"/>
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PRODUCT_MANAGER" permissionId="CATALOG_ADMIN"/>
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PRODUCT_MANAGER" permissionId="MANUFACTURING_ADMIN"/>
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PRODUCT_MANAGER" permissionId="ASSETMAINT_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PRODUCT_MANAGER" permissionId="OFBTOOLS_VIEW"/>
 
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PROCUREMENT_MANAGER" permissionId="PARTYMGR_ADMIN"/>
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PROCUREMENT_MANAGER" permissionId="FACILITY_ADMIN"/>
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PROCUREMENT_MANAGER" permissionId="ORDERMGR_ADMIN"/>
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PROCUREMENT_MANAGER" permissionId="CATALOG_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="PROCUREMENT_MANAGER" permissionId="OFBTOOLS_VIEW"/>
 
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="CATALOG_MANAGER" permissionId="PARTYMGR_ADMIN"/>
     <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="CATALOG_MANAGER" permissionId="CATALOG_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="CATALOG_MANAGER" permissionId="OFBTOOLS_VIEW"/>
 
     <!-- System UserLogin Account - see additional data in SecurityExtData -->
     <UserLogin userLoginId="system" enabled="N" isSystem="Y"/>
