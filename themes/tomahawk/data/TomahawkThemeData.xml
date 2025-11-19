@@ -19,5 +19,5 @@ under the License.
 -->
 
 <entity-engine-xml>
-    <VisualTheme visualThemeId="TOMAHAWK" visualThemeSetId="BACKOFFICE" description="Tomahawk: the evolution of the BlueLight theme"/>
+    <VisualTheme visualThemeId="TOMAHAWK" description="Tomahawk: the evolution of the BlueLight theme"/>
 </entity-engine-xml>
