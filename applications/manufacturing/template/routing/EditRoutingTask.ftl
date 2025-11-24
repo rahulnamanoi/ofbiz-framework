@@ -17,6 +17,21 @@ specific language governing permissions and limitations
 under the License.
 -->
 
+<script>
+function convertTimeToMilliseconds() {
+  var setupHours = parseInt(document.getElementById('estimatedSetupHours').value) || 0;
+  var setupMinutes = parseInt(document.getElementById('estimatedSetupMinutes').value) || 0;
+  var hours = parseInt(document.getElementById('estimatedHours').value) || 0;
+  var minutes = parseInt(document.getElementById('estimatedMinutes').value) || 0;
+
+  // Convert to milliseconds (1 hour = 3600000 ms, 1 minute = 60000 ms)
+  document.getElementById('hiddenEstimatedSetupMillis').value = (setupHours * 3600000) + (setupMinutes * 60000);
+  document.getElementById('hiddenEstimatedMillis').value = (hours * 3600000) + (minutes * 60000);
+
+  return true;
+}
+</script>
+
 <#if routingTask?has_content>
 <div class="screenlet">
   <div class="screenlet-title-bar">
@@ -26,8 +41,10 @@ under the License.
     <br class="clear"/>
   </div>
   <div class="screenlet-body">
-  <form name="routingtaskform" method="post" action="<@ofbizUrl>UpdateRoutingTask</@ofbizUrl>">
+  <form name="routingtaskform" method="post" action="<@ofbizUrl>UpdateRoutingTask</@ofbizUrl>" onsubmit="return convertTimeToMilliseconds();">
     <input type="hidden" name="workEffortId" value="${routingTask.workEffortId}" />
+    <input type="hidden" id="hiddenEstimatedSetupMillis" name="estimatedSetupMillis" />
+    <input type="hidden" id="hiddenEstimatedMillis" name="estimatedMilliSeconds" />
 <#else>
 <div class="screenlet">
   <div class="screenlet-title-bar">
@@ -37,9 +54,11 @@ under the License.
     <br class="clear"/>
   </div>
   <div class="screenlet-body">
-  <form name="routingtaskform" method="post" action="<@ofbizUrl>CreateRoutingTask</@ofbizUrl>">
+  <form name="routingtaskform" method="post" action="<@ofbizUrl>CreateRoutingTask</@ofbizUrl>" onsubmit="return convertTimeToMilliseconds();">
     <input type="hidden" name="workEffortTypeId" value="ROU_TASK" />
     <input type="hidden" name="currentStatusId" value="ROU_ACTIVE" />
+    <input type="hidden" id="hiddenEstimatedSetupMillis" name="estimatedSetupMillis" />
+    <input type="hidden" id="hiddenEstimatedMillis" name="estimatedMilliSeconds" />
 </#if>
   <table class="basic-table" cellspacing="0">
     <tr>
@@ -83,12 +102,22 @@ under the License.
     <tr>
       <td width='26%' align='right' valign='top' class="label">${uiLabelMap.ManufacturingTaskEstimatedSetupMillis}</td>
       <td width="5">&nbsp;</td>
-      <td width="74%"><input type="text" size="20" name="estimatedSetupMillis" value="${(routingTask.estimatedSetupMillis)!}" /></td>
+      <td width="74%">
+        <#assign setupHours = ((routingTask.estimatedSetupMillis)!0)?number / 3600000>
+        <#assign setupMinutes = (((routingTask.estimatedSetupMillis)!0)?number % 3600000) / 60000>
+       Hours <input type="number" style="width:100px;" id="estimatedSetupHours" size="10" name="estimatedSetupHours" value="${setupHours?int}" min="0" placeholder="Hours" />
+       Minutes <input type="number" style="width:100px;" id="estimatedSetupMinutes" size="10" name="estimatedSetupMinutes" value="${setupMinutes?int}" min="0" max="59" placeholder="Minutes" />
+      </td>
     </tr>
     <tr>
       <td width='26%' align='right' valign='top' class="label">${uiLabelMap.ManufacturingTaskEstimatedMilliSeconds}</td>
       <td width="5">&nbsp;</td>
-      <td width="74%"><input type="text" size="20" name="estimatedMilliSeconds" value="${(routingTask.estimatedMilliSeconds)!}" /></td>
+      <td width="74%">
+        <#assign hours = ((routingTask.estimatedMilliSeconds)!0)?number / 3600000>
+        <#assign minutes = (((routingTask.estimatedMilliSeconds)!0)?number % 3600000) / 60000>
+       Hours <input type="number" style="width:100px;" id="estimatedHours" size="3" name="estimatedHours" value="${hours?int}" min="0" placeholder="Hours" />
+       Minutes <input type="number" style="width:100px;" id="estimatedMinutes" size="3" name="estimatedMinutes" value="${minutes?int}" min="0" max="59" placeholder="Minutes" />
+      </td>
     </tr>
     <tr>
       <td width='26%' align='right' valign='top' class="label">${uiLabelMap.ManufacturingEstimateCalcMethod}</td>
