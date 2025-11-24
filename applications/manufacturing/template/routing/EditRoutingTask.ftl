@@ -105,8 +105,8 @@ function convertTimeToMilliseconds() {
       <td width="74%">
         <#assign setupHours = ((routingTask.estimatedSetupMillis)!0)?number / 3600000>
         <#assign setupMinutes = (((routingTask.estimatedSetupMillis)!0)?number % 3600000) / 60000>
-       Hours <input type="number" style="width:100px;" id="estimatedSetupHours" size="10" name="estimatedSetupHours" value="${setupHours?int}" min="0" placeholder="Hours" />
-       Minutes <input type="number" style="width:100px;" id="estimatedSetupMinutes" size="10" name="estimatedSetupMinutes" value="${setupMinutes?int}" min="0" max="59" placeholder="Minutes" />
+       <b>Hours</b> <input type="number" style="width:100px;" id="estimatedSetupHours" size="10" name="estimatedSetupHours" value="${setupHours?int}" min="0" placeholder="Hours" />
+       <b>Minutes</b> <input type="number" style="width:100px;" id="estimatedSetupMinutes" size="10" name="estimatedSetupMinutes" value="${setupMinutes?int}" min="0" max="59" placeholder="Minutes" />
       </td>
     </tr>
     <tr>
@@ -115,8 +115,8 @@ function convertTimeToMilliseconds() {
       <td width="74%">
         <#assign hours = ((routingTask.estimatedMilliSeconds)!0)?number / 3600000>
         <#assign minutes = (((routingTask.estimatedMilliSeconds)!0)?number % 3600000) / 60000>
-       Hours <input type="number" style="width:100px;" id="estimatedHours" size="3" name="estimatedHours" value="${hours?int}" min="0" placeholder="Hours" />
-       Minutes <input type="number" style="width:100px;" id="estimatedMinutes" size="3" name="estimatedMinutes" value="${minutes?int}" min="0" max="59" placeholder="Minutes" />
+       <b>Hours</b> <input type="number" style="width:100px;" id="estimatedHours" size="3" name="estimatedHours" value="${hours?int}" min="0" placeholder="Hours" />
+       <b>Minutes</b> <input type="number" style="width:100px;" id="estimatedMinutes" size="3" name="estimatedMinutes" value="${minutes?int}" min="0" max="59" placeholder="Minutes" />
       </td>
     </tr>
     <tr>
