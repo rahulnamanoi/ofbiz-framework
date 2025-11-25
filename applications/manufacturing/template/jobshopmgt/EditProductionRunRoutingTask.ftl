@@ -76,37 +76,31 @@ function convertTimeToMilliseconds() {
   <table class="basic-table" cellspacing="0">
     <#if !productionRunTask?has_content>
     <tr>
-      <td width='26%' align='right' valign='top' class="label">${uiLabelMap.ManufacturingRoutingTaskId}</td>
-      <td width="5">&nbsp;</td>
-      <td width="74%">
+      <td align='right' valign='top' class="label">${uiLabelMap.ManufacturingRoutingTaskId}</td>
+      <td>
         <@htmlTemplate.lookupField value="${parameters.routingTaskId!}" formName="productiontaskform" name="routingTaskId" id="routingTaskId" fieldFormName="LookupRoutingTask"/>
       </td>
     </tr>
     </#if>
     <tr>
-      <td width='26%' align='right' valign='top' class="label">${uiLabelMap.CommonSequenceNum}</td>
-      <td width="5">&nbsp;</td>
-      <td width="74%"><input type="text" size="4" name="priority" value="${(productionRunTask.priority)!}" /></td>
+      <td align='right' valign='top' class="label">${uiLabelMap.CommonSequenceNum}</td>
+      <td><input type="text" size="4" name="priority" value="${(productionRunTask.priority)!}" /></td>
     </tr>
     <tr>
-      <td width='26%' align='right' valign='top' class="label">${uiLabelMap.ManufacturingTaskName}</td>
-      <td width="5">&nbsp;</td>
-      <td width="74%"><input type="text" size="50" name="workEffortName" value="${(productionRunTask.workEffortName)!}" /></td>
+      <td align='right' valign='top' class="label">${uiLabelMap.ManufacturingTaskName}</td>
+      <td><input type="text" size="50" name="workEffortName" value="${(productionRunTask.workEffortName)!}" /></td>
     </tr>
     <tr>
-      <td width='26%' align='right' valign='top' class="label">${uiLabelMap.CommonDescription}</td>
-      <td width="5">&nbsp;</td>
-      <td width="74%"><input type="text" size="60" name="description" value="${(productionRunTask.description)!}" /></td>
+      <td align='right' valign='top' class="label">${uiLabelMap.CommonDescription}</td>
+      <td><input type="text" size="60" name="description" value="${(productionRunTask.description)!}" /></td>
     </tr>
     <tr>
-      <td width='26%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_reservPersons}</td>
-      <td width="5">&nbsp;</td>
-      <td width="74%"><input type="text" size="20" name="reservPersons" value="${(productionRunTask.reservPersons)!}" /></td>
+      <td align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_reservPersons}</td>
+      <td><input type="text" size="20" name="reservPersons" value="${(productionRunTask.reservPersons)!}" /></td>
     </tr>
     <tr>
-      <td width='26%' align='right' valign='top' class="label">${uiLabelMap.ManufacturingStartDate}</td>
-      <td width="5">&nbsp;</td>
-      <td width="74%">
+      <td align='right' valign='top' class="label">${uiLabelMap.ManufacturingStartDate}</td>
+      <td>
         <#assign startDateValue = "">
         <#assign formattedStartDate = "">
         <#if productionRunTask?has_content && productionRunTask.estimatedStartDate?has_content>
@@ -121,18 +115,16 @@ function convertTimeToMilliseconds() {
       </td>
     </tr>
     <tr>
-      <td width='26%' align='right' valign='top' class="label">${uiLabelMap.ManufacturingEstimatedCompletionDate}</td>
-      <td width="5">&nbsp;</td>
-      <td width="74%">
+      <td align='right' valign='top' class="label">${uiLabelMap.ManufacturingEstimatedCompletionDate}</td>
+      <td>
         <#if productionRunTask?has_content && productionRunTask.estimatedCompletionDate?has_content>
           ${productionRunTask.estimatedCompletionDate?string("yyyy-MM-dd HH:mm:ss")}
         </#if>
       </td>
     </tr>
     <tr>
-      <td width='26%' align='right' valign='top' class="label">${uiLabelMap.ManufacturingTaskEstimatedSetupMillis}</td>
-      <td width="5">&nbsp;</td>
-      <td width="74%">
+      <td align='right' valign='top' class="label">${uiLabelMap.ManufacturingTaskEstimatedSetupMillis}</td>
+      <td>
         <#assign setupHours = ((productionRunTask.estimatedSetupMillis)!0)?number / 3600000>
         <#assign setupMinutes = (((productionRunTask.estimatedSetupMillis)!0)?number % 3600000) / 60000>
        <b>Hours</b> <input type="number" style="width:100px;" id="estimatedSetupHours" size="10" name="estimatedSetupHours" value="${setupHours?int}" min="0" placeholder="Hours" />
@@ -140,9 +132,8 @@ function convertTimeToMilliseconds() {
       </td>
     </tr>
     <tr>
-      <td width='26%' align='right' valign='top' class="label">${uiLabelMap.ManufacturingTaskEstimatedMilliSeconds}</td>
-      <td width="5">&nbsp;</td>
-      <td width="74%">
+      <td align='right' valign='top' class="label">${uiLabelMap.ManufacturingTaskEstimatedMilliSeconds}</td>
+      <td>
         <#assign hours = ((productionRunTask.estimatedMilliSeconds)!0)?number / 3600000>
         <#assign minutes = (((productionRunTask.estimatedMilliSeconds)!0)?number % 3600000) / 60000>
        <b>Hours</b> <input type="number" style="width:100px;" id="estimatedHours" size="3" name="estimatedHours" value="${hours?int}" min="0" placeholder="Hours" />
