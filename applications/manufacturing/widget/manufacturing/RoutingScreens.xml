@@ -174,31 +174,13 @@ under the License.
                 <set field="helpAnchor" value="_create_edit_route_task"/>
                 <set field="workEffortId" from-field="parameters.workEffortId"/>
                 <entity-one entity-name="WorkEffort" value-field="routingTask"/>
-                <!-- Load dropdown values for the form -->
-                <entity-condition entity-name="WorkEffortPurposeType" list="workEffortPurposeTypes">
-                    <condition-expr field-name="workEffortPurposeTypeId" operator="like" value="ROU%"/>
-                    <order-by field-name="description"/>
-                </entity-condition>
-                <entity-condition entity-name="FixedAsset" list="fixedAssets">
-                    <condition-expr field-name="fixedAssetTypeId" operator="equals" value="GROUP_EQUIPMENT"/>
-                    <order-by field-name="fixedAssetName"/>
-                </entity-condition>
-
-                <entity-condition entity-name="CustomMethod" list="customMethods">
-                    <condition-expr field-name="customMethodTypeId" operator="equals" value="TASK_FORMULA"/>
-                    <order-by field-name="customMethodId"/>
-                </entity-condition>
             </actions>
             <widgets>
                 <decorator-screen name="CommonRoutingTaskDecorator">
                     <decorator-section name="body">
-                        <section>
-                            <widgets>
-                                <platform-specific>
-                                    <html><html-template location="component://manufacturing/template/routing/EditRoutingTask.ftl"/></html>
-                                </platform-specific>
-                            </widgets>
-                        </section>
+                        <screenlet title="${groovy: workEffortId ? uiLabelMap.PageTitleEditRoutingTask : uiLabelMap.ManufacturingNewRoutingTask}">
+                            <include-form name="EditRoutingTask" location="component://manufacturing/widget/manufacturing/RoutingTaskForms.xml"/>
+                        </screenlet>
                     </decorator-section>
                 </decorator-screen>
             </widgets>

@@ -67,7 +67,8 @@ if (dataResourceId) {
     dataResource = from('DataResource').where('dataResourceId', dataResourceId).cache(true).queryOne()
     SimpleMapProcessor.runSimpleMapProcessor('component://content/minilang/ContentManagementMapProcessors.xml',
             'dataResourceOut', dataResource, contentAssocDataResourceViewFrom, [], Locale.getDefault())
-    templateRoot = new FreeMarkerViewHandler().prepareViewContext(request, response, null)
+    templateRoot = [:]
+    FreeMarkerViewHandler.prepOfbizRoot(templateRoot, request, response)
     txt = DataResourceWorker.getDataResourceText(dataResource, 'text/html', Locale.getDefault(), templateRoot, delegator, true)
 
     if (txt) {

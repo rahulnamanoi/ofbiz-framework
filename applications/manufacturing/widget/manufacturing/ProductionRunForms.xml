@@ -193,10 +193,6 @@ under the License.
          odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
          <row-actions>
              <set field="estimatedTotalMilliSeconds" value="${groovy:estimatedMilliSeconds * quantity}"  type="BigDecimal"/>
-             <set field="estimatedSetupHours" value="${groovy: (estimatedSetupMillis ?: 0) / 3600000}" type="Integer"/>
-             <set field="estimatedSetupMinutes" value="${groovy: ((estimatedSetupMillis ?: 0) % 3600000) / 60000}" type="Integer"/>
-             <set field="estimatedTotalHours" value="${groovy: (estimatedTotalMilliSeconds ?: 0) / 3600000}" type="Integer"/>
-             <set field="estimatedTotalMinutes" value="${groovy: ((estimatedTotalMilliSeconds ?: 0) % 3600000) / 60000}" type="Integer"/>
          </row-actions>
         <field name="priority" title="${uiLabelMap.CommonSequenceNum}"><display/></field>
         <field name="workEffortId"  title="${uiLabelMap.ManufacturingTaskName}"><display description="${workEffortName} [${workEffortId}]"/></field>
@@ -204,18 +200,14 @@ under the License.
         <field name="reservPersons"><display/></field>
         <field name="estimatedStartDate"  title="${uiLabelMap.ManufacturingStartDate}"><display/></field>
         <field name="estimatedCompletionDate" title="${uiLabelMap.ManufacturingEstimatedCompletionDate}"><display/></field>
-        <field name="estimatedSetupMillis" title="${uiLabelMap.ManufacturingTaskEstimatedSetupMillis}" ><display description="${estimatedSetupHours}h ${estimatedSetupMinutes}m"/></field>
+        <field name="estimatedSetupMillis" title="${uiLabelMap.ManufacturingTaskEstimatedSetupMillis}" ><display/></field>
         <!--<field name="estimatedMilliSeconds" title="${uiLabelMap.ManufacturingTaskEstimatedMilliSeconds}" ><display/></field>-->
-        <field name="estimatedTotalMilliSeconds" title="${uiLabelMap.ManufacturingTaskEstimatedTotalMilliSeconds}" ><display description="${estimatedTotalHours}h ${estimatedTotalMinutes}m"/></field>
+        <field name="estimatedTotalMilliSeconds" title="${uiLabelMap.ManufacturingTaskEstimatedTotalMilliSeconds}" ><display/></field>
     </grid>
     <grid name="ListProductionRunRoutingTasks" list-name="productionRunRoutingTasks" target="ProductionRunTasks"
         odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
         <row-actions>
             <set field="estimatedTotalMilliSeconds" value="${groovy:estimatedMilliSeconds * quantity}" type="BigDecimal"/>
-            <set field="estimatedSetupHours" value="${groovy: (estimatedSetupMillis ?: 0) / 3600000}" type="Integer"/>
-            <set field="estimatedSetupMinutes" value="${groovy: ((estimatedSetupMillis ?: 0) % 3600000) / 60000}" type="Integer"/>
-            <set field="estimatedTotalHours" value="${groovy: (estimatedTotalMilliSeconds ?: 0) / 3600000}" type="Integer"/>
-            <set field="estimatedTotalMinutes" value="${groovy: ((estimatedTotalMilliSeconds ?: 0) % 3600000) / 60000}" type="Integer"/>
         </row-actions>
         <field name="priority" title="${uiLabelMap.CommonSequenceNum}"><display/></field>
         <field name="workEffortId"  title="${uiLabelMap.ManufacturingTaskName}"><display description="${workEffortName} [${workEffortId}]"/></field>
@@ -223,9 +215,9 @@ under the License.
         <field name="reservPersons"><display/></field>
         <field name="estimatedStartDate"  title="${uiLabelMap.ManufacturingStartDate}"><display/></field>
         <field name="estimatedCompletionDate" title="${uiLabelMap.ManufacturingEstimatedCompletionDate}"><display/></field>
-        <field name="estimatedSetupMillis" title="${uiLabelMap.ManufacturingTaskEstimatedSetupMillis}" ><display description="${estimatedSetupHours}h ${estimatedSetupMinutes}m"/></field>
+        <field name="estimatedSetupMillis" title="${uiLabelMap.ManufacturingTaskEstimatedSetupMillis}" ><display/></field>
         <!--<field name="estimatedMilliSeconds" title="${uiLabelMap.ManufacturingTaskEstimatedMilliSeconds}" ><display/></field>-->
-        <field name="estimatedTotalMilliSeconds" title="${uiLabelMap.ManufacturingTaskEstimatedTotalMilliSeconds}" ><display description="${estimatedTotalHours}h ${estimatedTotalMinutes}m"/></field>
+        <field name="estimatedTotalMilliSeconds" title="${uiLabelMap.ManufacturingTaskEstimatedTotalMilliSeconds}" ><display/></field>
         <field name="editLink" title=" " widget-style="smallSubmit">
             <hyperlink description="${uiLabelMap.CommonEdit}" target="ProductionRunTasks" also-hidden="false">
                 <parameter param-name="routingTaskId" from-field="workEffortId"/>
@@ -373,12 +365,6 @@ under the License.
     </form>
     <grid name="ListProductionRunDeclRoutingTasks" list-name="productionRunRoutingTasks" target="ProductionRunDeclaration"
         odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
-        <row-actions>
-            <set field="actualSetupHours" value="${groovy: (actualSetupMillis ?: 0) / 3600000}" type="Integer"/>
-            <set field="actualSetupMinutes" value="${groovy: ((actualSetupMillis ?: 0) % 3600000) / 60000}" type="Integer"/>
-            <set field="actualRunHours" value="${groovy: (actualMilliSeconds ?: 0) / 3600000}" type="Integer"/>
-            <set field="actualRunMinutes" value="${groovy: ((actualMilliSeconds ?: 0) % 3600000) / 60000}" type="Integer"/>
-        </row-actions>
         <field name="actionForm"><hidden value="EditRoutingTask"/></field>
         <field name="productionRunId"><hidden value="${workEffortParentId}"/></field>
         <field name="routingTaskId"><hidden value="${workEffortId}"/></field>
@@ -390,8 +376,8 @@ under the License.
         <field name="fixedAssetId"  title="${uiLabelMap.ManufacturingMachine}"><display/></field>
         <field name="reservPersons"><display/></field>
         <field name="estimatedCompletionDate" title="${uiLabelMap.ManufacturingEstimatedCompletionDate}"><display/></field>
-        <field name="actualSetupMillis" title="${uiLabelMap.ManufacturingTaskActualSetupMillis}" ><display description="${actualSetupHours}h ${actualSetupMinutes}m"/></field>
-        <field name="actualMilliSeconds" title="${uiLabelMap.ManufacturingTaskActualMilliSeconds}" ><display description="${actualRunHours}h ${actualRunMinutes}m"/></field>
+        <field name="actualSetupMillis" title="${uiLabelMap.ManufacturingTaskActualSetupMillis}" ><display/></field>
+        <field name="actualMilliSeconds" title="${uiLabelMap.ManufacturingTaskActualMilliSeconds}" ><display/></field>
         <field name="quantityProduced" title="${uiLabelMap.ManufacturingQuantityProduced}" ><display/></field>
         <field name="startLink" title=" " widget-style="smallSubmit" use-when="&quot;${startTaskId}&quot;.equals(&quot;${workEffortId}&quot;)">
             <hyperlink description="${uiLabelMap.ManufacturingStartProductionRunTask}" target="changeProductionRunTaskStatus" also-hidden="false">

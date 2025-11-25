@@ -19,5 +19,5 @@ under the License.
 -->
 
 <entity-engine-xml>
-    <VisualTheme visualThemeId="BLUELIGHT" description="BlueLight Theme: breadcrumbs, drop-down menus and rounded corners"/>
+    <VisualTheme visualThemeId="BLUELIGHT" visualThemeSetId="BACKOFFICE" description="BlueLight Theme: breadcrumbs, drop-down menus and rounded corners"/>
 </entity-engine-xml>

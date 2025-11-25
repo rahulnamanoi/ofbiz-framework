@@ -146,7 +146,7 @@ ofbiz_setup_env() {
   OFBIZ_POSTGRES_TENANT_USER=${OFBIZ_POSTGRES_TENANT_USER:-ofbiztenant}
   OFBIZ_POSTGRES_TENANT_PASSWORD=${OFBIZ_POSTGRES_TENANT_PASSWORD:-ofbiztenant}
 
-  OFBIZ_DISABLE_COMPONENTS=${OFBIZ_DISABLE_COMPONENTS:-plugins/birt/ofbiz-component.xml}
+  OFBIZ_DISABLE_COMPONENTS=${OFBIZ_DISABLE_COMPONENTS-plugins/birt/ofbiz-component.xml}
 }
 
 ###############################################################################
@@ -260,6 +260,7 @@ disable_component() {
   XML_FILE="/ofbiz/$1"
   if [ -f "$XML_FILE" ]; then
     TMPFILE=$(mktemp)
+
     xsltproc /ofbiz/disable-component.xslt "$XML_FILE" > "$TMPFILE"
     mv "$TMPFILE" "$XML_FILE"
   else
@@ -272,24 +273,19 @@ disable_component() {
 # components' 'enabled' attribute to false.
 # $1 - Comma separated list of paths to configuration XML files to be modified.
 disable_components() {
-  COMMA_SEPARATED_PATHS=$1
+  COMMA_SEPARATED_PATHS="$1"
 
-  # Remove spaces after commas
-  COMMA_SEPARATED_PATHS="${COMMA_SEPARATED_PATHS//, /,}"
+  if [ -n "$COMMA_SEPARATED_PATHS" ]; then
 
-  [ -z "$COMMA_SEPARATED_PATHS" ] && return 0
+    # Split the comma separated paths into separate arguments.
+    IFS=,
+    set "$COMMA_SEPARATED_PATHS"
 
-  # Split on commas into $1 $2 ...
-  oldIFS=$IFS
-  IFS=,
-  set -- $COMMA_SEPARATED_PATHS    # <- no quotes, use -- to avoid option parsing
-  IFS=$oldIFS
-
-  # Iterate through the split arguments
-  while [ -n "$1" ]; do
-    disable_component "$1"
-    shift
-  done
+    while [ -n "$1" ]; do
+      disable_component "$1"
+      shift
+    done
+  fi
 }
 
 ###############################################################################
@@ -320,7 +316,7 @@ apply_configuration() {
     fi
 
     if [ -n "$OFBIZ_DISABLE_COMPONENTS" ]; then
-      disable_components "$OFBIZ_DISABLE_COMPONENTS"
+      disable_component "$OFBIZ_DISABLE_COMPONENTS"
     fi
 
     touch "$CONTAINER_CONFIG_APPLIED"

@@ -18,6 +18,10 @@
  */
 package org.apache.ofbiz.widget.model;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,9 +43,10 @@ public class ModelFormTest {
 
     @Before
     public void setUp() throws GenericEntityException {
-        delegator = Mockito.mock(Delegator.class);
         context = new HashMap<>();
-        context.put("delegator", delegator);
+        delegator = Mockito.mock(Delegator.class);
+        when(delegator.findList(any(), any(), any(), any(), any(), Mockito.anyBoolean()))
+                .thenReturn(new ArrayList<>());
     }
 
     @Test
