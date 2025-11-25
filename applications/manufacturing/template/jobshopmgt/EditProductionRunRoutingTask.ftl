@@ -18,6 +18,16 @@ under the License.
 -->
 
 <script>
+function updateEstimatedStartDate() {
+  var dateTimeInput = document.getElementById('estimatedStartDateInput');
+  var hiddenInput = document.getElementById('estimatedStartDate');
+  if (dateTimeInput && dateTimeInput.value && hiddenInput) {
+    // Convert from "2025-11-25T13:26" to "2025-11-25 13:26:00"
+    var dateTimeValue = dateTimeInput.value.replace('T', ' ') + ':00';
+    hiddenInput.value = dateTimeValue;
+  }
+}
+
 function convertTimeToMilliseconds() {
   var setupHours = parseInt(document.getElementById('estimatedSetupHours').value) || 0;
   var setupMinutes = parseInt(document.getElementById('estimatedSetupMinutes').value) || 0;
@@ -28,13 +38,8 @@ function convertTimeToMilliseconds() {
   document.getElementById('hiddenEstimatedSetupMillis').value = (setupHours * 3600000) + (setupMinutes * 60000);
   document.getElementById('hiddenEstimatedMillis').value = (hours * 3600000) + (minutes * 60000);
 
-  // Convert datetime-local format to OFBiz expected format
-  var startDateInput = document.getElementsByName('estimatedStartDate')[0];
-  if (startDateInput && startDateInput.value) {
-    // Convert from "2025-11-25T13:26" to "2025-11-25 13:26:00"
-    var dateTimeValue = startDateInput.value.replace('T', ' ') + ':00';
-    startDateInput.value = dateTimeValue;
-  }
+  // Update the estimated start date one more time before submit
+  updateEstimatedStartDate();
 
   return true;
 }
@@ -103,12 +108,16 @@ function convertTimeToMilliseconds() {
       <td width="5">&nbsp;</td>
       <td width="74%">
         <#assign startDateValue = "">
+        <#assign formattedStartDate = "">
         <#if productionRunTask?has_content && productionRunTask.estimatedStartDate?has_content>
           <#assign startDateValue = productionRunTask.estimatedStartDate?string("yyyy-MM-dd'T'HH:mm")>
+          <#assign formattedStartDate = productionRunTask.estimatedStartDate?string("yyyy-MM-dd HH:mm:ss")>
         <#elseif nowTimestamp?has_content>
           <#assign startDateValue = nowTimestamp?string("yyyy-MM-dd'T'HH:mm")>
+          <#assign formattedStartDate = nowTimestamp?string("yyyy-MM-dd HH:mm:ss")>
         </#if>
-        <input type="datetime-local" name="estimatedStartDate" value="${startDateValue}" size="25" />
+        <input type="datetime-local" id="estimatedStartDateInput" value="${startDateValue}" size="25" onchange="updateEstimatedStartDate()" />
+        <input type="hidden" name="estimatedStartDate" id="estimatedStartDate" value="${formattedStartDate}" />
       </td>
     </tr>
     <tr>
