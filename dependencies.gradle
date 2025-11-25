@@ -26,11 +26,7 @@ dependencies {
     implementation 'com.googlecode.owasp-java-html-sanitizer:owasp-java-html-sanitizer:20240325.1'
     implementation 'com.googlecode.libphonenumber:libphonenumber:8.13.52'
     implementation 'com.ibm.icu:icu4j:76.1'
-    implementation ('com.lowagie:itext:2.1.7') { // Don't update due to license change in newer versions, see OFBIZ-10455
-        exclude  group: 'bouncycastle', module: 'bcmail-jdk14'
-        exclude  group: 'bouncycastle', module: 'bcprov-jdk14'
-        exclude  group: 'bouncycastle', module: 'bctsp-jdk14'
-    }
+    implementation 'com.github.librepdf:openpdf:1.3.43' // This is the last version with com.lowagie.text that is used (only) by PdfSurveyServices class.
     implementation 'com.sun.mail:javax.mail:1.6.2'
     implementation 'com.rometools:rome:2.1.0'
     implementation 'com.thoughtworks.xstream:xstream:1.4.21'
@@ -80,6 +76,7 @@ dependencies {
     implementation 'oro:oro:2.0.8'
     implementation 'wsdl4j:wsdl4j:1.6.3'
     implementation 'com.auth0:java-jwt:4.4.0'
+    implementation 'com.auth0:jwks-rsa:0.22.2'
     implementation 'org.jdom:jdom2:2.0.6.1'
     implementation 'com.google.re2j:re2j:1.7'
     implementation 'xerces:xercesImpl:2.12.2'
