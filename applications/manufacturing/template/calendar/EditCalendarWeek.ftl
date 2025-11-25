@@ -54,6 +54,20 @@ function convertCapacityToMilliseconds() {
   var sundayMinutes = parseInt(document.getElementById('sundayCapacityMinutes').value) || 0;
   document.getElementById('hiddenSundayCapacity').value = (sundayHours * 3600000) + (sundayMinutes * 60000);
 
+  // Convert time inputs to proper format (HH:MM:SS)
+  var timeInputs = ['mondayStartTime', 'tuesdayStartTime', 'wednesdayStartTime',
+                    'thursdayStartTime', 'fridayStartTime', 'saturdayStartTime', 'sundayStartTime'];
+
+  timeInputs.forEach(function(inputName) {
+    var timeInput = document.getElementsByName(inputName)[0];
+    if (timeInput && timeInput.value) {
+      // Convert HH:MM to HH:MM:SS format
+      if (timeInput.value.length === 5) {
+        timeInput.value = timeInput.value + ':00';
+      }
+    }
+  });
+
   return true;
 }
 </script>
@@ -67,9 +81,10 @@ function convertCapacityToMilliseconds() {
     <br class="clear"/>
   </div>
   <div class="screenlet-body">
-  <form name="calendarweekform" method="post" action="<@ofbizUrl>updateCalendarWeek</@ofbizUrl>" onsubmit="return convertCapacityToMilliseconds();">
+  <form name="calendarweekform" method="post"
+        action="<@ofbizUrl>updateCalendarWeek</@ofbizUrl>"
+        onsubmit="return convertCapacityToMilliseconds();">
     <input type="hidden" name="calendarWeekId" value="${calendarWeek.calendarWeekId}" />
-    <input type="hidden" name="calendarId" value="${calendarWeek.calendarId}" />
 
     <!-- Hidden fields for capacity in milliseconds -->
     <input type="hidden" id="hiddenMondayCapacity" name="mondayCapacity" />
@@ -88,8 +103,11 @@ function convertCapacityToMilliseconds() {
     <br class="clear"/>
   </div>
   <div class="screenlet-body">
-  <form name="calendarweekform" method="post" action="<@ofbizUrl>createCalendarWeek</@ofbizUrl>" onsubmit="return convertCapacityToMilliseconds();">
-    <input type="hidden" name="calendarId" value="${parameters.calendarId!}" />
+  <form name="calendarweekform" method="post"
+        action="<@ofbizUrl>createCalendarWeek</@ofbizUrl>"
+        onsubmit="return convertCapacityToMilliseconds();">
+
+    <!-- calendarWeekId will be entered by user or auto-generated -->
 
     <!-- Hidden fields for capacity in milliseconds -->
     <input type="hidden" id="hiddenMondayCapacity" name="mondayCapacity" />
@@ -102,140 +120,239 @@ function convertCapacityToMilliseconds() {
 </#if>
 
 <table class="basic-table" cellpadding='2' cellspacing='0' border='0'>
-  <#if calendarWeek?has_content>
-    <tr>
-      <td width='15%' align='right' valign='top' class="label">${uiLabelMap.ManufacturingCalendarWeekId}*</td>
-      <td width="1%">&nbsp;</td>
-      <td colspan="4">
-        ${calendarWeek.calendarWeekId}
-      </td>
-    </tr>
-  </#if>
-
   <tr>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.CommonDescription}</td>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.ManufacturingCalendarWeekId}*
+    </td>
     <td width="1%">&nbsp;</td>
     <td colspan="4">
-      <input type="text" name="description" size="30" maxlength="100" value="${(calendarWeek.description)!}"/>
+      <#if calendarWeek?has_content>
+        ${calendarWeek.calendarWeekId}
+      <#else>
+        <input type="text" name="calendarWeekId" size="20" maxlength="20"
+               required="required" placeholder="Enter Calendar Week ID"/>
+      </#if>
+    </td>
+  </tr>
+
+  <tr>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.CommonDescription}
+    </td>
+    <td width="1%">&nbsp;</td>
+    <td colspan="4">
+      <input type="text" name="description" size="100" maxlength="100"
+             value="${(calendarWeek.description)!}"/>
     </td>
   </tr>
 
   <!-- Monday -->
   <tr>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_mondayStartTime}</td>
-    <td width="1%">&nbsp;</td>
-    <td width="15%">
-      <input type="time" name="mondayStartTime" value="${(calendarWeek.mondayStartTime)!}"/>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.FormFieldTitle_mondayStartTime}
     </td>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_mondayCapacity}</td>
+    <td width="1%">&nbsp;</td>
+    <td width="20%">
+      <#assign mondayTimeValue = "">
+      <#if calendarWeek?? && calendarWeek.mondayStartTime??>
+        <#assign mondayTimeValue = calendarWeek.mondayStartTime?string("HH:mm")>
+      </#if>
+      <input type="time" name="mondayStartTime" value="${mondayTimeValue}"/>
+    </td>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.FormFieldTitle_mondayCapacity}
+    </td>
     <td width="1%">&nbsp;</td>
     <td width="53%">
-      <#assign mondayHours = ((calendarWeek.mondayCapacity)!0)?number / 3600000>
+      <#assign mondayHours   = ((calendarWeek.mondayCapacity)!0)?number / 3600000>
       <#assign mondayMinutes = (((calendarWeek.mondayCapacity)!0)?number % 3600000) / 60000>
-      <b>Hours</b> <input type="number" style="width:70px;" id="mondayCapacityHours" size="6" name="mondayCapacityHours" value="${mondayHours?floor}" min="0" placeholder="Hours" />
-      <b>Minutes</b> <input type="number" style="width:70px;" id="mondayCapacityMinutes" size="6" name="mondayCapacityMinutes" value="${mondayMinutes?floor}" min="0" max="59" placeholder="Minutes" />
+      <b>Hours</b>
+      <input type="number" style="width:70px;" id="mondayCapacityHours" size="6"
+             name="mondayCapacityHours" value="${mondayHours?floor}" min="0" placeholder="Hours" />
+      <b>Minutes</b>
+      <input type="number" style="width:70px;" id="mondayCapacityMinutes" size="6"
+             name="mondayCapacityMinutes" value="${mondayMinutes?floor}" min="0" max="59"
+             placeholder="Minutes" />
     </td>
   </tr>
 
   <!-- Tuesday -->
   <tr>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_tuesdayStartTime}</td>
-    <td width="1%">&nbsp;</td>
-    <td width="15%">
-      <input type="time" name="tuesdayStartTime" value="${(calendarWeek.tuesdayStartTime)!}"/>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.FormFieldTitle_tuesdayStartTime}
     </td>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_tuesdayCapacity}</td>
+    <td width="1%">&nbsp;</td>
+    <td width="20%">
+      <#assign tuesdayTimeValue = "">
+      <#if calendarWeek?? && calendarWeek.tuesdayStartTime??>
+        <#assign tuesdayTimeValue = calendarWeek.tuesdayStartTime?string("HH:mm")>
+      </#if>
+      <input type="time" name="tuesdayStartTime" value="${tuesdayTimeValue}"/>
+    </td>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.FormFieldTitle_tuesdayCapacity}
+    </td>
     <td width="1%">&nbsp;</td>
     <td width="53%">
-      <#assign tuesdayHours = ((calendarWeek.tuesdayCapacity)!0)?number / 3600000>
+      <#assign tuesdayHours   = ((calendarWeek.tuesdayCapacity)!0)?number / 3600000>
       <#assign tuesdayMinutes = (((calendarWeek.tuesdayCapacity)!0)?number % 3600000) / 60000>
-      <b>Hours</b> <input type="number" style="width:70px;" id="tuesdayCapacityHours" size="6" name="tuesdayCapacityHours" value="${tuesdayHours?floor}" min="0" placeholder="Hours" />
-      <b>Minutes</b> <input type="number" style="width:70px;" id="tuesdayCapacityMinutes" size="6" name="tuesdayCapacityMinutes" value="${tuesdayMinutes?floor}" min="0" max="59" placeholder="Minutes" />
+      <b>Hours</b>
+      <input type="number" style="width:70px;" id="tuesdayCapacityHours" size="6"
+             name="tuesdayCapacityHours" value="${tuesdayHours?floor}" min="0" placeholder="Hours" />
+      <b>Minutes</b>
+      <input type="number" style="width:70px;" id="tuesdayCapacityMinutes" size="6"
+             name="tuesdayCapacityMinutes" value="${tuesdayMinutes?floor}" min="0" max="59"
+             placeholder="Minutes" />
     </td>
   </tr>
 
   <!-- Wednesday -->
   <tr>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_wednesdayStartTime}</td>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.FormFieldTitle_wednesdayStartTime}
+    </td>
     <td width="1%">&nbsp;</td>
     <td width="15%">
-      <input type="time" name="wednesdayStartTime" value="${(calendarWeek.wednesdayStartTime)!}"/>
+      <#assign wednesdayTimeValue = "">
+      <#if calendarWeek?? && calendarWeek.wednesdayStartTime??>
+        <#assign wednesdayTimeValue = calendarWeek.wednesdayStartTime?string("HH:mm")>
+      </#if>
+      <input type="time" name="wednesdayStartTime" value="${wednesdayTimeValue}"/>
     </td>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_wednesdayCapacity}</td>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.FormFieldTitle_wednesdayCapacity}
+    </td>
     <td width="1%">&nbsp;</td>
     <td width="53%">
-      <#assign wednesdayHours = ((calendarWeek.wednesdayCapacity)!0)?number / 3600000>
+      <#assign wednesdayHours   = ((calendarWeek.wednesdayCapacity)!0)?number / 3600000>
       <#assign wednesdayMinutes = (((calendarWeek.wednesdayCapacity)!0)?number % 3600000) / 60000>
-      <b>Hours</b> <input type="number" style="width:70px;" id="wednesdayCapacityHours" size="6" name="wednesdayCapacityHours" value="${wednesdayHours?floor}" min="0" placeholder="Hours" />
-      <b>Minutes</b> <input type="number" style="width:70px;" id="wednesdayCapacityMinutes" size="6" name="wednesdayCapacityMinutes" value="${wednesdayMinutes?floor}" min="0" max="59" placeholder="Minutes" />
+      <b>Hours</b>
+      <input type="number" style="width:70px;" id="wednesdayCapacityHours" size="6"
+             name="wednesdayCapacityHours" value="${wednesdayHours?floor}" min="0" placeholder="Hours" />
+      <b>Minutes</b>
+      <input type="number" style="width:70px;" id="wednesdayCapacityMinutes" size="6"
+             name="wednesdayCapacityMinutes" value="${wednesdayMinutes?floor}" min="0" max="59"
+             placeholder="Minutes" />
     </td>
   </tr>
 
   <!-- Thursday -->
   <tr>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_thursdayStartTime}</td>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.FormFieldTitle_thursdayStartTime}
+    </td>
     <td width="1%">&nbsp;</td>
     <td width="15%">
-      <input type="time" name="thursdayStartTime" value="${(calendarWeek.thursdayStartTime)!}"/>
+      <#assign thursdayTimeValue = "">
+      <#if calendarWeek?? && calendarWeek.thursdayStartTime??>
+        <#assign thursdayTimeValue = calendarWeek.thursdayStartTime?string("HH:mm")>
+      </#if>
+      <input type="time" name="thursdayStartTime" value="${thursdayTimeValue}"/>
     </td>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_thursdayCapacity}</td>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.FormFieldTitle_thursdayCapacity}
+    </td>
     <td width="1%">&nbsp;</td>
     <td width="53%">
-      <#assign thursdayHours = ((calendarWeek.thursdayCapacity)!0)?number / 3600000>
+      <#assign thursdayHours   = ((calendarWeek.thursdayCapacity)!0)?number / 3600000>
       <#assign thursdayMinutes = (((calendarWeek.thursdayCapacity)!0)?number % 3600000) / 60000>
-      <b>Hours</b> <input type="number" style="width:70px;" id="thursdayCapacityHours" size="6" name="thursdayCapacityHours" value="${thursdayHours?floor}" min="0" placeholder="Hours" />
-      <b>Minutes</b> <input type="number" style="width:70px;" id="thursdayCapacityMinutes" size="6" name="thursdayCapacityMinutes" value="${thursdayMinutes?floor}" min="0" max="59" placeholder="Minutes" />
+      <b>Hours</b>
+      <input type="number" style="width:70px;" id="thursdayCapacityHours" size="6"
+             name="thursdayCapacityHours" value="${thursdayHours?floor}" min="0" placeholder="Hours" />
+      <b>Minutes</b>
+      <input type="number" style="width:70px;" id="thursdayCapacityMinutes" size="6"
+             name="thursdayCapacityMinutes" value="${thursdayMinutes?floor}" min="0" max="59"
+             placeholder="Minutes" />
     </td>
   </tr>
 
   <!-- Friday -->
   <tr>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_fridayStartTime}</td>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.FormFieldTitle_fridayStartTime}
+    </td>
     <td width="1%">&nbsp;</td>
     <td width="15%">
-      <input type="time" name="fridayStartTime" value="${(calendarWeek.fridayStartTime)!}"/>
+      <#assign fridayTimeValue = "">
+      <#if calendarWeek?? && calendarWeek.fridayStartTime??>
+        <#assign fridayTimeValue = calendarWeek.fridayStartTime?string("HH:mm")>
+      </#if>
+      <input type="time" name="fridayStartTime" value="${fridayTimeValue}"/>
     </td>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_fridayCapacity}</td>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.FormFieldTitle_fridayCapacity}
+    </td>
     <td width="1%">&nbsp;</td>
     <td width="53%">
-      <#assign fridayHours = ((calendarWeek.fridayCapacity)!0)?number / 3600000>
+      <#assign fridayHours   = ((calendarWeek.fridayCapacity)!0)?number / 3600000>
       <#assign fridayMinutes = (((calendarWeek.fridayCapacity)!0)?number % 3600000) / 60000>
-      <b>Hours</b> <input type="number" style="width:70px;" id="fridayCapacityHours" size="6" name="fridayCapacityHours" value="${fridayHours?floor}" min="0" placeholder="Hours" />
-      <b>Minutes</b> <input type="number" style="width:70px;" id="fridayCapacityMinutes" size="6" name="fridayCapacityMinutes" value="${fridayMinutes?floor}" min="0" max="59" placeholder="Minutes" />
+      <b>Hours</b>
+      <input type="number" style="width:70px;" id="fridayCapacityHours" size="6"
+             name="fridayCapacityHours" value="${fridayHours?floor}" min="0" placeholder="Hours" />
+      <b>Minutes</b>
+      <input type="number" style="width:70px;" id="fridayCapacityMinutes" size="6"
+             name="fridayCapacityMinutes" value="${fridayMinutes?floor}" min="0" max="59"
+             placeholder="Minutes" />
     </td>
   </tr>
 
   <!-- Saturday -->
   <tr>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_saturdayStartTime}</td>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.FormFieldTitle_saturdayStartTime}
+    </td>
     <td width="1%">&nbsp;</td>
     <td width="15%">
-      <input type="time" name="saturdayStartTime" value="${(calendarWeek.saturdayStartTime)!}"/>
+      <#assign saturdayTimeValue = "">
+      <#if calendarWeek?? && calendarWeek.saturdayStartTime??>
+        <#assign saturdayTimeValue = calendarWeek.saturdayStartTime?string("HH:mm")>
+      </#if>
+      <input type="time" name="saturdayStartTime" value="${saturdayTimeValue}"/>
     </td>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_saturdayCapacity}</td>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.FormFieldTitle_saturdayCapacity}
+    </td>
     <td width="1%">&nbsp;</td>
     <td width="53%">
-      <#assign saturdayHours = ((calendarWeek.saturdayCapacity)!0)?number / 3600000>
+      <#assign saturdayHours   = ((calendarWeek.saturdayCapacity)!0)?number / 3600000>
       <#assign saturdayMinutes = (((calendarWeek.saturdayCapacity)!0)?number % 3600000) / 60000>
-      <b>Hours</b> <input type="number" style="width:70px;" id="saturdayCapacityHours" size="6" name="saturdayCapacityHours" value="${saturdayHours?floor}" min="0" placeholder="Hours" />
-      <b>Minutes</b> <input type="number" style="width:70px;" id="saturdayCapacityMinutes" size="6" name="saturdayCapacityMinutes" value="${saturdayMinutes?floor}" min="0" max="59" placeholder="Minutes" />
+      <b>Hours</b>
+      <input type="number" style="width:70px;" id="saturdayCapacityHours" size="6"
+             name="saturdayCapacityHours" value="${saturdayHours?floor}" min="0" placeholder="Hours" />
+      <b>Minutes</b>
+      <input type="number" style="width:70px;" id="saturdayCapacityMinutes" size="6"
+             name="saturdayCapacityMinutes" value="${saturdayMinutes?floor}" min="0" max="59"
+             placeholder="Minutes" />
     </td>
   </tr>
 
   <!-- Sunday -->
   <tr>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_sundayStartTime}</td>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.FormFieldTitle_sundayStartTime}
+    </td>
     <td width="1%">&nbsp;</td>
     <td width="15%">
-      <input type="time" name="sundayStartTime" value="${(calendarWeek.sundayStartTime)!}"/>
+      <#assign sundayTimeValue = "">
+      <#if calendarWeek?? && calendarWeek.sundayStartTime??>
+        <#assign sundayTimeValue = calendarWeek.sundayStartTime?string("HH:mm")>
+      </#if>
+      <input type="time" name="sundayStartTime" value="${sundayTimeValue}"/>
     </td>
-    <td width='15%' align='right' valign='top' class="label">${uiLabelMap.FormFieldTitle_sundayCapacity}</td>
+    <td width='15%' align='right' valign='top' class="label">
+      ${uiLabelMap.FormFieldTitle_sundayCapacity}
+    </td>
     <td width="1%">&nbsp;</td>
     <td width="53%">
-      <#assign sundayHours = ((calendarWeek.sundayCapacity)!0)?number / 3600000>
+      <#assign sundayHours   = ((calendarWeek.sundayCapacity)!0)?number / 3600000>
       <#assign sundayMinutes = (((calendarWeek.sundayCapacity)!0)?number % 3600000) / 60000>
-      <b>Hours</b> <input type="number" style="width:70px;" id="sundayCapacityHours" size="6" name="sundayCapacityHours" value="${sundayHours?floor}" min="0" placeholder="Hours" />
-      <b>Minutes</b> <input type="number" style="width:70px;" id="sundayCapacityMinutes" size="6" name="sundayCapacityMinutes" value="${sundayMinutes?floor}" min="0" max="59" placeholder="Minutes" />
+      <b>Hours</b>
+      <input type="number" style="width:70px;" id="sundayCapacityHours" size="6"
+             name="sundayCapacityHours" value="${sundayHours?floor}" min="0" placeholder="Hours" />
+      <b>Minutes</b>
+      <input type="number" style="width:70px;" id="sundayCapacityMinutes" size="6"
+             name="sundayCapacityMinutes" value="${sundayMinutes?floor}" min="0" max="59"
+             placeholder="Minutes" />
     </td>
   </tr>
 

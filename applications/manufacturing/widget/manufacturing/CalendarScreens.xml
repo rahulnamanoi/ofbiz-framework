@@ -121,8 +121,9 @@ under the License.
                 <set field="tabButtonItem" value="CalendarWeek"/>
                 <set field="headerItem" value="calendar"/>
                 <set field="helpAnchor" value="_createedit_calendar_week"/>
-
-                <entity-one entity-name="TechDataCalendarWeek" value-field="calendarWeek"/>
+                <entity-one entity-name="TechDataCalendarWeek" value-field="calendarWeek">
+                    <field-map field-name="calendarWeekId" from-field="parameters.calendarWeekId"/>
+                </entity-one>
             </actions>
             <widgets>
                 <decorator-screen name="CommonCalendarDecorator">
