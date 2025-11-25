@@ -34,7 +34,8 @@ if (currentValue) {
         rootDir = request.getSession().getServletContext().getRealPath('/')
         wrapper = FreeMarkerWorker.getDefaultOfbizWrapper()
         WrappingTemplateModel.setDefaultObjectWrapper(wrapper)
-        templateRoot = new FreeMarkerViewHandler().prepareViewContext(request, response, null)
+        templateRoot = [:]
+        FreeMarkerViewHandler.prepOfbizRoot(templateRoot, request, response)
         ctx = [:]
         ctx.rootDir = rootDir
         // webSiteId and https need to go here, too

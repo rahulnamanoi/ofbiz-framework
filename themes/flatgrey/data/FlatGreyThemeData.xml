@@ -19,5 +19,5 @@ under the License.
 -->
 
 <entity-engine-xml>
-    <VisualTheme visualThemeId="FLAT_GREY" description="Flat Grey - Floating Layout, Sight-Impaired Accessible, Bidirectional"/>
+    <VisualTheme visualThemeId="FLAT_GREY" visualThemeSetId="BACKOFFICE" description="Flat Grey - Floating Layout, Sight-Impaired Accessible, Bidirectional"/>
 </entity-engine-xml>
