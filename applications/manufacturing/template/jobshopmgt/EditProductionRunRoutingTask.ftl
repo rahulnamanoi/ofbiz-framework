@@ -28,6 +28,14 @@ function convertTimeToMilliseconds() {
   document.getElementById('hiddenEstimatedSetupMillis').value = (setupHours * 3600000) + (setupMinutes * 60000);
   document.getElementById('hiddenEstimatedMillis').value = (hours * 3600000) + (minutes * 60000);
 
+  // Convert datetime-local format to OFBiz expected format
+  var startDateInput = document.getElementsByName('estimatedStartDate')[0];
+  if (startDateInput && startDateInput.value) {
+    // Convert from "2025-11-25T13:26" to "2025-11-25 13:26:00.0"
+    var dateTimeValue = startDateInput.value.replace('T', ' ') + ':00.0';
+    startDateInput.value = dateTimeValue;
+  }
+
   return true;
 }
 </script>
