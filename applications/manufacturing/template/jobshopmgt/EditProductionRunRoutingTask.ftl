@@ -94,7 +94,13 @@ function convertTimeToMilliseconds() {
       <td width='26%' align='right' valign='top' class="label">${uiLabelMap.ManufacturingStartDate}</td>
       <td width="5">&nbsp;</td>
       <td width="74%">
-        <@htmlTemplate.renderDateTimeField name="estimatedStartDate" event="" action="" className="" alert="" title="Format: yyyy-MM-dd HH:mm:ss.SSS" value="${(productionRunTask.estimatedStartDate)!nowTimestamp}" size="25" maxlength="30" id="estimatedStartDate" dateType="date" shortDateInput=false timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
+        <#assign startDateValue = "">
+        <#if productionRunTask?has_content && productionRunTask.estimatedStartDate?has_content>
+          <#assign startDateValue = productionRunTask.estimatedStartDate?string("yyyy-MM-dd'T'HH:mm")>
+        <#elseif nowTimestamp?has_content>
+          <#assign startDateValue = nowTimestamp?string("yyyy-MM-dd'T'HH:mm")>
+        </#if>
+        <input type="datetime-local" name="estimatedStartDate" value="${startDateValue}" size="25" />
       </td>
     </tr>
     <tr>
