@@ -31,8 +31,8 @@ function convertTimeToMilliseconds() {
   // Convert datetime-local format to OFBiz expected format
   var startDateInput = document.getElementsByName('estimatedStartDate')[0];
   if (startDateInput && startDateInput.value) {
-    // Convert from "2025-11-25T13:26" to "2025-11-25 13:26:00.0"
-    var dateTimeValue = startDateInput.value.replace('T', ' ') + ':00.0';
+    // Convert from "2025-11-25T13:26" to "2025-11-25 13:26:00"
+    var dateTimeValue = startDateInput.value.replace('T', ' ') + ':00';
     startDateInput.value = dateTimeValue;
   }
 
